@@ -1,0 +1,6 @@
+C:\Users\Asus\source\repos\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.csproj.AssemblyReference.cache
+C:\Users\Asus\source\repos\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\source\repos\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.AssemblyInfoInputs.cache
+C:\Users\Asus\source\repos\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.AssemblyInfo.cs
+C:\Users\Asus\source\repos\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.sourcelink.json

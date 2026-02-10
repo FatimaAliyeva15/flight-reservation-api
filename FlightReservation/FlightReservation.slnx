@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="FlighReservation_Business/FlighReservation_Business.csproj" />
+  <Project Path="FlightReservation/FlightReservation.csproj" />
+  <Project Path="FlightReservation_Core/FlightReservation_Core.csproj" />
+  <Project Path="FlightReservation_DataAccess/FlightReservation_DataAccess.csproj" />
+  <Project Path="FlightReservation_Entities/FlightReservation_Entities.csproj" />
+</Solution>

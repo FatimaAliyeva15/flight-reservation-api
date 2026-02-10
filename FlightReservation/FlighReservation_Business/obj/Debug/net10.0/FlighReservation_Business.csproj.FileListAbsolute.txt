@@ -1,0 +1,15 @@
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\bin\Debug\net10.0\FlighReservation_Business.deps.json
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\bin\Debug\net10.0\FlighReservation_Business.runtimeconfig.json
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\bin\Debug\net10.0\FlighReservation_Business.dll
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\bin\Debug\net10.0\FlighReservation_Business.pdb
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.csproj.AssemblyReference.cache
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.AssemblyInfoInputs.cache
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.AssemblyInfo.cs
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.sourcelink.json
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.dll
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\refint\FlighReservation_Business.dll
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.pdb
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\FlighReservation_Business.genruntimeconfig.cache
+C:\Users\Asus\source\repos\FlightReservation\FlighReservation_Business\obj\Debug\net10.0\ref\FlighReservation_Business.dll
