@@ -3608,11 +3608,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlightReservation\\FlightReservation.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation\\FlightReservation.csproj",
       "projectName": "FlightReservation",
-      "projectPath": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlightReservation\\FlightReservation.csproj",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation\\FlightReservation.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlightReservation\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

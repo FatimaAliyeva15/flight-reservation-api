@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj": {}
+    "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj": {
+    "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj",
+        "projectUniqueName": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj",
         "projectName": "FlighReservation_Business",
-        "projectPath": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj",
+        "projectPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\FlighReservation_Business.csproj",
         "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlighReservation_Business\\obj\\",
+        "outputPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

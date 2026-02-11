@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>FlightReservation_Entities</id>
+    <version>1.0.0</version>
+    <authors>FlightReservation_Entities</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="3d7ce373fd4351aa679f136e3102baf7363824da" />
+    <dependencies>
+      <group targetFramework="net10.0">
+        <dependency id="Microsoft.AspNetCore.Identity.EntityFrameworkCore" version="10.0.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore" version="10.0.2" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="10.0.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\bin\Debug\net10.0\FlightReservation_Entities.runtimeconfig.json" target="lib\net10.0\FlightReservation_Entities.runtimeconfig.json" />
+    <file src="C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\bin\Debug\net10.0\FlightReservation_Entities.dll" target="lib\net10.0\FlightReservation_Entities.dll" />
+  </files>
+</package>

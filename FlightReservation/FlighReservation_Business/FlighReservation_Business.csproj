@@ -20,4 +20,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Validators\" />
+    <Folder Include="Services\Abstracts\" />
+    <Folder Include="Services\Concretes\" />
+    <Folder Include="Utilities\Exceptions\" />
+    <Folder Include="Utilities\Constants\" />
+    <Folder Include="Utilities\Profilies\" />
+  </ItemGroup>
+
 </Project>

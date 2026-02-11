@@ -1432,6 +1432,21 @@
         "build": {
           "buildTransitive/net8.0/_._": {}
         }
+      },
+      "FlightReservation_Core/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "10.0.2",
+          "Microsoft.EntityFrameworkCore": "10.0.2",
+          "Microsoft.EntityFrameworkCore.SqlServer": "10.0.2"
+        },
+        "compile": {
+          "bin/placeholder/FlightReservation_Core.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FlightReservation_Core.dll": {}
+        }
       }
     }
   },
@@ -4082,10 +4097,16 @@
         "system.security.cryptography.protecteddata.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "FlightReservation_Core/1.0.0": {
+      "type": "project",
+      "path": "../FlightReservation_Core/FlightReservation_Core.csproj",
+      "msbuildProject": "../FlightReservation_Core/FlightReservation_Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "FlightReservation_Core >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 10.0.2",
       "Microsoft.EntityFrameworkCore >= 10.0.2",
       "Microsoft.EntityFrameworkCore.Design >= 10.0.2",
@@ -4100,11 +4121,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlightReservation_Entities\\FlightReservation_Entities.csproj",
+      "projectUniqueName": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\FlightReservation_Entities.csproj",
       "projectName": "FlightReservation_Entities",
-      "projectPath": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlightReservation_Entities\\FlightReservation_Entities.csproj",
+      "projectPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\FlightReservation_Entities.csproj",
       "packagesPath": "C:\\Users\\Asus\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Asus\\source\\repos\\FlightReservation\\FlightReservation_Entities\\obj\\",
+      "outputPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4124,7 +4145,11 @@
       "frameworks": {
         "net10.0": {
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Core\\FlightReservation_Core.csproj": {
+              "projectPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Core\\FlightReservation_Core.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

@@ -1,5 +1,5 @@
-﻿using FlightReservation_Entities.Concretes;
-using FlightReservation_Entities.Enums.Auth;
+﻿using FlightReservation_Core.Enums.Auth;
+using FlightReservation_Entities.Concretes;
 using Microsoft.AspNetCore.Identity;
 
 
@@ -14,5 +14,6 @@ namespace FlightReservation_Core.Entities.Concrete.Auth
         public UserRole Role { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
     }
 }

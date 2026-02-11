@@ -1,4 +1,5 @@
 ﻿using FlightReservation_DataAccess.EFCore;
+using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,7 +20,7 @@ namespace FlightReservation_DataAccess
                     options.UseSqlServer(configuration.GetConnectionString("Default"));
                 });
 
-                //services.AddScoped<IUnitOfWork, UnitOfWork.Concrete.UnitOfWork>();
+                services.AddScoped<IUnitOfWork, UnitOfWork.Concrete.UnitOfWork>();
 
                 return services;
             }

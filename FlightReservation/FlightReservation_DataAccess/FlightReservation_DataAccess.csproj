@@ -22,6 +22,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FlightReservation_Core\FlightReservation_Core.csproj" />
+    <ProjectReference Include="..\FlightReservation_Entities\FlightReservation_Entities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Configurations\" />
   </ItemGroup>
 
 </Project>

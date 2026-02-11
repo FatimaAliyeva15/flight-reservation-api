@@ -1,7 +1,4 @@
-﻿using FlightReservation_Entities.Enums.Auth;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FlightReservation_Core.Enums.Auth;
 
 namespace FlightReservation_Entities.DTOs.AuthDTOs
 {
@@ -13,6 +10,6 @@ namespace FlightReservation_Entities.DTOs.AuthDTOs
 
         public string Password { get; set; }
 
-       // public UserRole Role { get; set; }
+        public UserRole Role { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FlightReservation_Entities.Enums.Auth
+namespace FlightReservation_Core.Enums.Auth
 {
     public enum UserRole
     {

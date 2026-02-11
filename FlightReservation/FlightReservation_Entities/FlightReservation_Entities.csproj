@@ -20,4 +20,13 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FlightReservation_Core\FlightReservation_Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DTOs\TicketDTOs\" />
+    <Folder Include="DTOs\SeatDTOs\" />
+  </ItemGroup>
+
 </Project>

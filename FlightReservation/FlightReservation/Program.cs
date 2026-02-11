@@ -17,10 +17,11 @@ if (app.Environment.IsDevelopment())
 
     app.UseSwaggerUI(c =>
     {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "FlightReservation API");
         c.RoutePrefix = string.Empty;
     });
 }
+
 
 app.UseHttpsRedirection();
 
