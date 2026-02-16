@@ -7,12 +7,8 @@ namespace FlightReservation_Entities.DTOs.NotificationDTOs
 {
     public class NotificationCreateDto: IDto
     {
-        public Guid Id { get; set; }
-
         public string Title { get; set; }
-
         public string Message { get; set; }
-
-        public bool IsRead { get; set; }
+        public Guid AppUserId { get; set; }
     }
 }

@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{07538D36-BFAC-B45F-CDD2-CE26056194DB}|FlightReservation_DataAccess\\FlightReservation_DataAccess.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_dataaccess\\efcore\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{07538D36-BFAC-B45F-CDD2-CE26056194DB}|FlightReservation_DataAccess\\FlightReservation_DataAccess.csproj|solutionrelative:flightreservation_dataaccess\\efcore\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{07538D36-BFAC-B45F-CDD2-CE26056194DB}|FlightReservation_DataAccess\\FlightReservation_DataAccess.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_dataaccess\\configurations\\reservationconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07538D36-BFAC-B45F-CDD2-CE26056194DB}|FlightReservation_DataAccess\\FlightReservation_DataAccess.csproj|solutionrelative:flightreservation_dataaccess\\configurations\\reservationconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\configurationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_entities\\dtos\\reservationdtos\\reservationgetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|solutionrelative:flightreservation_entities\\dtos\\reservationdtos\\reservationgetdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_entities\\concretes\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|solutionrelative:flightreservation_entities\\concretes\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,27 +39,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_DataAccess\\EFCore\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "FlightReservation_DataAccess\\EFCore\\AppDbContext.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_DataAccess\\EFCore\\AppDbContext.cs",
-              "RelativeToolTip": "FlightReservation_DataAccess\\EFCore\\AppDbContext.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAIwBAAAAA0AAAAAAAAAA==",
+              "Title": "ReservationConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_DataAccess\\Configurations\\ReservationConfiguration.cs",
+              "RelativeDocumentMoniker": "FlightReservation_DataAccess\\Configurations\\ReservationConfiguration.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_DataAccess\\Configurations\\ReservationConfiguration.cs",
+              "RelativeToolTip": "FlightReservation_DataAccess\\Configurations\\ReservationConfiguration.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAcwBIAAABsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T18:33:25.784Z",
+              "WhenOpened": "2026-02-16T19:08:18.487Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ConfigurationService.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\ConfigurationService.cs",
-              "RelativeDocumentMoniker": "FlighReservation_Business\\ConfigurationService.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\ConfigurationService.cs",
-              "RelativeToolTip": "FlighReservation_Business\\ConfigurationService.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAiwA4AAAAAAAAAAAAAAA==",
+              "Title": "ReservationGetDto.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationGetDto.cs",
+              "RelativeDocumentMoniker": "FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationGetDto.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationGetDto.cs",
+              "RelativeToolTip": "FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationGetDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-11T18:32:06.505Z",
+              "WhenOpened": "2026-02-16T19:08:05.936Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Reservation.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "RelativeDocumentMoniker": "FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "RelativeToolTip": "FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAuwBMAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-16T18:35:29.069Z",
               "EditorCaption": ""
             }
           ]

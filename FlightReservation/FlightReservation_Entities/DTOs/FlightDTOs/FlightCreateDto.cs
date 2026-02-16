@@ -7,18 +7,16 @@ namespace FlightReservation_Entities.DTOs.FlightDTOs
 {
     public class FlightCreateDto: IDto
     {
-        public string Airline { get; set; }
-
-        public string From { get; set; }
-
-        public string To { get; set; }
-
+        public string FlightNumber { get; set; }
+        public decimal Price { get; set; }
         public DateTime DepartureTime { get; set; }
-
         public DateTime ArrivalTime { get; set; }
 
-        public decimal Price { get; set; }
+        public Guid AirlineId { get; set; }
+        public Guid AircraftId { get; set; }
+        public Guid DepartureAirportId { get; set; }
+        public Guid ArrivalAirportId { get; set; }
 
-        public int TotalSeats { get; set; }
+
     }
 }

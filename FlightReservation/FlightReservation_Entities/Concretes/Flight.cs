@@ -11,6 +11,11 @@ namespace FlightReservation_Entities.Concretes
     public class Flight: BaseEntity, IEntity
     {
         public string FlightNumber { get; set; }
+        public decimal Price { get; set; }
+        public string AdminComment { get; set; }
+        public DateTime DepartureTime { get; set; }
+        public DateTime ArrivalTime { get; set; }
+        public FlightStatus Status { get; set; } = FlightStatus.PendingApproval;
 
         public Guid AirlineId { get; set; }
         public Airline Airline { get; set; }
@@ -23,12 +28,6 @@ namespace FlightReservation_Entities.Concretes
 
         public Guid ArrivalAirportId { get; set; }
         public Airport ArrivalAirport { get; set; }
-
-        public DateTime DepartureTime { get; set; }
-        public DateTime ArrivalTime { get; set; }
-
-        public decimal Price { get; set; }
-        public string AdminComment { get; set; }
 
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Seat> Seats { get; set; }

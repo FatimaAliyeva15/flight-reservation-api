@@ -1,16 +1,13 @@
-﻿using FlightReservation_Entities.DTOs.PessengerDTOs;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FlightReservation_Core.Entities.Abstract;
+
 
 namespace FlightReservation_Entities.DTOs.ReservationDTOs
 {
-    public class ReservationCreateDto
+    public class ReservationCreateDto: IDto
     {
-        public int FlightId { get; set; }
-
-        public int SeatCount { get; set; }
-
-        public List<PassengerDto> Passengers { get; set; }
+        public Guid FlightId { get; set; }
+        public Guid UserId { get; set; }
+        public List<Guid> PassengerIds { get; set; }
     }
 }
+
