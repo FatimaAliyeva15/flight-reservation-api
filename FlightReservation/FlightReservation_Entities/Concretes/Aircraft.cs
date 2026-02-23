@@ -1,5 +1,5 @@
 ﻿using FlightReservation_Core.Entities.Abstract;
-using FlightReservation_Entities.Common;
+using FlightReservation_Core.Entities.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;

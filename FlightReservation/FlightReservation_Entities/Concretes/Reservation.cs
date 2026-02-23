@@ -1,6 +1,6 @@
 ﻿using FlightReservation_Core.Entities.Abstract;
+using FlightReservation_Core.Entities.Common;
 using FlightReservation_Core.Entities.Concrete.Auth;
-using FlightReservation_Entities.Common;
 using FlightReservation_Entities.DTOs.ReservationPassengerDTOs;
 using FlightReservation_Entities.Enums;
 using System.Collections.ObjectModel;

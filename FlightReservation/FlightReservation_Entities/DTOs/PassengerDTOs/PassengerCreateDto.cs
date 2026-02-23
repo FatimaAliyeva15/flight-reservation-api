@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace FlightReservation_Entities.DTOs.PessengerDTOs
+namespace FlightReservation_Entities.DTOs.PassengerDTOs
 {
     public class PassengerCreateDto: IDto
     {

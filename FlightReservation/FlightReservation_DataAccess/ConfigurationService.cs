@@ -11,19 +11,14 @@ namespace FlightReservation_DataAccess
 {
     public static class ConfigurationService
     {
-        extension(IServiceCollection services)
+        public static IServiceCollection AddDataAccessConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            public IServiceCollection AddDataAccessConfiguration(IConfiguration configuration)
+            services.AddDbContext<AppDbContext>(opt =>
             {
-                services.AddDbContext<AppDbContext>(options =>
-                {
-                    options.UseSqlServer(configuration.GetConnectionString("Default"));
-                });
-
-                services.AddScoped<IUnitOfWork, UnitOfWork.Concrete.UnitOfWork>();
-
-                return services;
-            }
+                opt.UseSqlServer(configuration.GetConnectionString("Default"));
+            });
+            services.AddScoped<IUnitOfWork, UnitOfWork.Concrete.UnitOfWork>();
+            return services;
         }
     }
-}
+ }

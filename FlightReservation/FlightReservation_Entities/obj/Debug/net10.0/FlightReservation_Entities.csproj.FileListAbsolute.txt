@@ -8,12 +8,15 @@ C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Ent
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\bin\Debug\net10.0\FlightReservation_Entities.runtimeconfig.json
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\bin\Debug\net10.0\FlightReservation_Entities.dll
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\bin\Debug\net10.0\FlightReservation_Entities.pdb
+C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\bin\Debug\net10.0\FlightReservation_Core.dll
+C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\bin\Debug\net10.0\FlightReservation_Core.pdb
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.csproj.AssemblyReference.cache
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.AssemblyInfoInputs.cache
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.AssemblyInfo.cs
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.csproj.CoreCompileInputs.cache
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.sourcelink.json
+C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightRe.D4B811CB.Up2Date
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.dll
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\refint\FlightReservation_Entities.dll
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation_Entities\obj\Debug\net10.0\FlightReservation_Entities.pdb

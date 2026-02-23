@@ -1,6 +1,12 @@
+using FlighReservation_Business;
+using FlightReservation_DataAccess;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+builder.Services.AddDataAccessConfiguration(builder.Configuration);
+builder.Services.AddBusinessConfiguration(builder.Configuration);
+
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

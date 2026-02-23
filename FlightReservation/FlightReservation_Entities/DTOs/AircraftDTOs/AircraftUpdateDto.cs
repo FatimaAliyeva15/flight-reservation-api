@@ -9,5 +9,6 @@ namespace FlightReservation_Entities.DTOs.AircraftDTOs
     {
         public string Model { get; set; }
         public int Capacity { get; set; }
+        public Guid AirlineId { get; set; }
     }
 }

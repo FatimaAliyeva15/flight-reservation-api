@@ -1,5 +1,6 @@
 ﻿using FlightReservation_Core.DataAccess.Abstract;
 using FlightReservation_Core.Entities.Abstract;
+using FlightReservation_Core.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Text;
 namespace FlightReservation_Core.DataAccess.Concrete
 {
     public class BaseRepository<TEntity, TContext> : IBaseRepository<TEntity>
-        where TEntity : class, IEntity, new()
+        where TEntity : BaseEntity, IEntity, new()
         where TContext : DbContext
     {
         private readonly TContext _context;
@@ -23,7 +24,7 @@ namespace FlightReservation_Core.DataAccess.Concrete
         {
             await _entities.AddAsync(entity);
         }
-        public async Task Delete(TEntity entity)
+        public async Task HardDeleteAsync(TEntity entity)
         {
             _entities.Remove(entity);
         }
@@ -54,7 +55,7 @@ namespace FlightReservation_Core.DataAccess.Concrete
 
         private IQueryable<TEntity> GetQuery(params string[] includes)
         {
-            IQueryable<TEntity> query = _context.Set<TEntity>();
+            IQueryable<TEntity> query = _context.Set<TEntity>().Where(x => !x.IsDeleted);
 
             if (includes != null)
             {
@@ -63,7 +64,35 @@ namespace FlightReservation_Core.DataAccess.Concrete
                     query = query.Include(include);
                 }
             }
+
             return query;
+        }
+
+        public async Task SoftDeleteAsync(TEntity entity)
+        {
+            entity.IsDeleted = true;
+            _entities.Update(entity);
+        }
+
+        public async Task RecoverAsync(TEntity entity)
+        {
+            if (entity is BaseEntity baseEntity)    
+            {
+                baseEntity.IsDeleted = false;
+                _entities.Update(entity);
+            }
+        }
+
+        public async Task<bool> IsExistsAsync(Guid id)
+        {
+            return await _entities.AnyAsync(e => e.Id == id && !(e as BaseEntity).IsDeleted);
+        }
+
+        public Task<List<TEntity>> GetDeletedAsync()
+        {
+            return _context.Set<TEntity>()
+                   .Where(x => x.IsDeleted)
+                   .ToListAsync();
         }
     }
 }
