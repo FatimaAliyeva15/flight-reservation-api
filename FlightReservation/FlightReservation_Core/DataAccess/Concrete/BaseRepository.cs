@@ -28,9 +28,21 @@ namespace FlightReservation_Core.DataAccess.Concrete
         {
             _entities.Remove(entity);
         }
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter, params string[] incudes)
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> filter, bool includeDeleted = false, params string[] includes)
         {
-            IQueryable<TEntity> query = GetQuery(incudes);
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            if (!includeDeleted)
+                query = query.Where(x => !x.IsDeleted);
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
             return await query.FirstOrDefaultAsync(filter);
         }
 

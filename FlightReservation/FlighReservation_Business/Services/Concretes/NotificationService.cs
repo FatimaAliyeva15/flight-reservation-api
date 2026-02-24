@@ -89,8 +89,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<NotificationGetDto>> GetNotificationByIdAsync(Guid id)
         {
-            var notification = await _unitOfWork.NotificationRepository
-            .GetAsync(n => n.Id == id, "User");
+            var notification = await _unitOfWork.NotificationRepository.GetAsync(n => n.Id == id, includeDeleted: false, "User");
 
             if (notification == null)
                 return new ErrorDataResult<NotificationGetDto>(null, "Notification not found");

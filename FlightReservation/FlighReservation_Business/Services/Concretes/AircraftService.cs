@@ -68,7 +68,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<AircraftGetDto>> GetAircraftByIdAsync(Guid id)
         {
-            var existsAircraft = await _unitOfWork.AircraftRepository.GetAsync(a => a.Id == id, "Airline");
+            var existsAircraft = await _unitOfWork.AircraftRepository.GetAsync(a => a.Id == id, includeDeleted: false, "Airline");
             if (existsAircraft == null)
                 return new ErrorDataResult<AircraftGetDto>(_mapper.Map<AircraftGetDto>(existsAircraft), "Aircraft not founded");
 

@@ -6,6 +6,7 @@ using System.Text;
 
 namespace FlightReservation_Entities.Concretes
 {
+    
     public class Ticket: BaseEntity, IEntity
     {
         public decimal Price { get; set; }

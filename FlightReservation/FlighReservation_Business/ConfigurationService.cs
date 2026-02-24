@@ -30,6 +30,9 @@ namespace FlighReservation_Business
             services.AddScoped<IAirportService, AirportService>();
             services.AddScoped<IPassengerService, PassengerService>();
             services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IFlightService, FlightService>();
+            services.AddScoped<ISeatService, SeatService>();
+            services.AddScoped<ITicketService, TicketService>();
 
 
 

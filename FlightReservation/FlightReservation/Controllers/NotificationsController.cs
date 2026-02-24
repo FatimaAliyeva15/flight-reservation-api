@@ -21,6 +21,8 @@ namespace FlightReservation.Controllers
         {
             var result = await _notificationService.AddNotificationAsync(createDto);
             if (!result.Success)
+
+
                 return BadRequest(result.Message);
             return Ok(result.Message);
         }
