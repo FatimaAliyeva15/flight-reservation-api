@@ -11,9 +11,9 @@ namespace FlightReservation_Entities.DTOs.ReservationDTOs
         public Guid Id { get; set; }
         public decimal TotalPrice { get; set; }
         public ReservationStatus Status { get; set; }
-        public Guid FlightId { get; set; }
-        public Guid UserId { get; set; }
-        public List<Guid> TicketIds { get; set; }
-        public List<Guid> PaymentIds { get; set; }
+        public bool IsPaid { get; set; }
+        public string AppUserName { get; set; }
+        public string FlightNumber { get; set; }
+        public int TicketCount { get; set; }
     }
 }

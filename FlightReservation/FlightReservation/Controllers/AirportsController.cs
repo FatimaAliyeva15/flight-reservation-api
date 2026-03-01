@@ -53,7 +53,7 @@ namespace FlightReservation.Controllers
             return Ok(result.Message);
         }
 
-        [HttpPut("recover/{id:guid}")]
+        [HttpPatch("recover/{id:guid}")]
         public async Task<IActionResult> RecoverAirport(Guid id)
         {
             var result = await _airportService.RecoverAirportAsync(id);

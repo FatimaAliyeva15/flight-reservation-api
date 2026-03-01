@@ -14,7 +14,7 @@ namespace FlightReservation_DataAccess.Configurations
             builder.Property(x => x.Name).IsRequired().HasMaxLength(100);
             builder.Property(x => x.City).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Country).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.IATACode).IsRequired().HasMaxLength(10);
+            builder.Property(x => x.IATACode).IsRequired().HasMaxLength(3);
             builder.HasIndex(x => x.IATACode).IsUnique();
         }
     }

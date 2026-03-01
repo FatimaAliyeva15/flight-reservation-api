@@ -332,10 +332,10 @@ C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\staticwebassets.development.json
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\staticwebassets.build.endpoints.json
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\swae.build.ex.cache
-C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\FlightRe.AD63DD48.Up2Date
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\FlightReservation.dll
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\refint\FlightReservation.dll
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\FlightReservation.pdb
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\FlightReservation.genruntimeconfig.cache
 C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\ref\FlightReservation.dll
+C:\Users\Asus\Desktop\AirlineReservation\FlightReservation\FlightReservation\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

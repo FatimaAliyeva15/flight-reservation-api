@@ -13,7 +13,7 @@ namespace FlighReservation_Business.Utilities.Profilies
         {
             CreateMap<AircraftCreateDto, Aircraft>();
             CreateMap<AircraftUpdateDto, Aircraft>();
-            CreateMap<Aircraft, AircraftGetAllDto>();
+            CreateMap<Aircraft, AircraftGetAllDto>().ForMember(dest => dest.AirlineName, opt => opt.MapFrom(src => src.Airline != null ? src.Airline.Name : null));
             CreateMap<Aircraft, AircraftGetDto>();
         }
     }

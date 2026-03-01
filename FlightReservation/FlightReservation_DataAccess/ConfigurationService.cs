@@ -15,10 +15,12 @@ namespace FlightReservation_DataAccess
         {
             services.AddDbContext<AppDbContext>(opt =>
             {
-                opt.UseSqlServer(configuration.GetConnectionString("Default"));
+                opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddScoped<IUnitOfWork, UnitOfWork.Concrete.UnitOfWork>();
             return services;
         }
     }
  }
+
+

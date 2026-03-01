@@ -92,7 +92,7 @@
     "ContainingType": "FlightReservation.Controllers.AircraftsController",
     "Method": "RecoverAircraft",
     "RelativePath": "api/Aircrafts/RecoverAircraft/recover/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -234,7 +234,7 @@
     "ContainingType": "FlightReservation.Controllers.AirlinesController",
     "Method": "RecoverAirline",
     "RelativePath": "api/Airlines/RecoverAirline/recover/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -376,7 +376,7 @@
     "ContainingType": "FlightReservation.Controllers.AirportsController",
     "Method": "RecoverAirport",
     "RelativePath": "api/Airports/RecoverAirport/recover/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -461,7 +461,7 @@
     "ContainingType": "FlightReservation.Controllers.FlightsController",
     "Method": "CancelFlight",
     "RelativePath": "api/Flights/CancelFlight/{id}/cancel",
-    "HttpMethod": "PUT",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -550,7 +550,7 @@
     "ContainingType": "FlightReservation.Controllers.FlightsController",
     "Method": "RecoverFlight",
     "RelativePath": "api/Flights/RecoverFlight/recover/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -713,7 +713,7 @@
     "ContainingType": "FlightReservation.Controllers.NotificationsController",
     "Method": "RecoverNotification",
     "RelativePath": "api/Notifications/RecoverNotification/recover/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -855,7 +855,7 @@
     "ContainingType": "FlightReservation.Controllers.PassengersController",
     "Method": "RecoverPassenger",
     "RelativePath": "api/Passengers/RecoverPassenger/recover/{id}",
-    "HttpMethod": "PUT",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -899,6 +899,844 @@
       {
         "Name": "updateDto",
         "Type": "FlightReservation_Entities.DTOs.PassengerDTOs.PassengerUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "ConfirmPayment",
+    "RelativePath": "api/Payments/ConfirmPayment/confirm/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "CreatePayment",
+    "RelativePath": "api/Payments/CreatePayment",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createDto",
+        "Type": "FlightReservation_Entities.DTOs.PaymentDTOs.PaymentCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "GetAllDeletedPayments",
+    "RelativePath": "api/Payments/GetAllDeletedPayments/deleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "GetAllPayments",
+    "RelativePath": "api/Payments/GetAllPayments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "GetAllPaymentsPaginated",
+    "RelativePath": "api/Payments/GetAllPaymentsPaginated/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "GetPaymentById",
+    "RelativePath": "api/Payments/GetPaymentById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "GetPaymentsByCurrentUser",
+    "RelativePath": "api/Payments/GetPaymentsByCurrentUser/passenger",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "GetPaymentsByReservation",
+    "RelativePath": "api/Payments/GetPaymentsByReservation/reservation/{reservationId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reservationId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "HardDeletePayment",
+    "RelativePath": "api/Payments/HardDeletePayment/hard/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "RecoverPayment",
+    "RelativePath": "api/Payments/RecoverPayment/recover/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "RefundPayment",
+    "RelativePath": "api/Payments/RefundPayment/refund/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "SoftDeletePayment",
+    "RelativePath": "api/Payments/SoftDeletePayment/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.PaymentsController",
+    "Method": "UpdatePayment",
+    "RelativePath": "api/Payments/UpdatePayment/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateDto",
+        "Type": "FlightReservation_Entities.DTOs.PaymentDTOs.PaymentUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "AddReservation",
+    "RelativePath": "api/Reservations/AddReservation",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createDto",
+        "Type": "FlightReservation_Entities.DTOs.ReservationDTOs.ReservationCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "CancelReservation",
+    "RelativePath": "api/Reservations/CancelReservation/cancel/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "ConfirmReservationAfterPayment",
+    "RelativePath": "api/Reservations/ConfirmReservationAfterPayment/confirm-after-payment/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "CreateReservationWithTickets",
+    "RelativePath": "api/Reservations/CreateReservationWithTickets/create-with-tickets",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FlightReservation_Entities.DTOs.ReservationDTOs.ReservationWithTicketsDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "GetAllReservations",
+    "RelativePath": "api/Reservations/GetAllReservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "GetDeletedReservation",
+    "RelativePath": "api/Reservations/GetDeletedReservation/deleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "GetPaginatedReservation",
+    "RelativePath": "api/Reservations/GetPaginatedReservation/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "GetReservationById",
+    "RelativePath": "api/Reservations/GetReservationById/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "GetReservationByPassenger",
+    "RelativePath": "api/Reservations/GetReservationByPassenger/by-passenger/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "HardDeleteReservation",
+    "RelativePath": "api/Reservations/HardDeleteReservation/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "RecoverReservation",
+    "RelativePath": "api/Reservations/RecoverReservation/recover/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "SoftDeleteReservation",
+    "RelativePath": "api/Reservations/SoftDeleteReservation/soft-delete/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "UpdateReservation",
+    "RelativePath": "api/Reservations/UpdateReservation/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "updateDto",
+        "Type": "FlightReservation_Entities.DTOs.ReservationDTOs.ReservationUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "AddSeat",
+    "RelativePath": "api/Seats/AddSeat",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FlightReservation_Entities.DTOs.SeatDTOs.SeatCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "BookSeat",
+    "RelativePath": "api/Seats/BookSeat/book",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "seatId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "reservationId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "GetAllSeats",
+    "RelativePath": "api/Seats/GetAllSeats",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "GetByIdSeat",
+    "RelativePath": "api/Seats/GetByIdSeat/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "GetDeletedSeat",
+    "RelativePath": "api/Seats/GetDeletedSeat/deleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "GetPaginatedSeat",
+    "RelativePath": "api/Seats/GetPaginatedSeat/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "GetSeatsByFlight",
+    "RelativePath": "api/Seats/GetSeatsByFlight/by-flight/{flightId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "flightId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "onlyAvailable",
+        "Type": "System.Boolean",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "HardDeleteSeat",
+    "RelativePath": "api/Seats/HardDeleteSeat/hard/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "RecoverSeat",
+    "RelativePath": "api/Seats/RecoverSeat/recover/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "ReleaseSeat",
+    "RelativePath": "api/Seats/ReleaseSeat/release/{seatId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "seatId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "ReserveSeat",
+    "RelativePath": "api/Seats/ReserveSeat/reserve",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "seatId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "reservationId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "SoftDeleteSeat",
+    "RelativePath": "api/Seats/SoftDeleteSeat/soft/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.SeatsController",
+    "Method": "UpdateSeat",
+    "RelativePath": "api/Seats/UpdateSeat/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "FlightReservation_Entities.DTOs.SeatDTOs.SeatUpdateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "AddTicket",
+    "RelativePath": "api/Tickets/AddTicket",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "FlightReservation_Entities.DTOs.TicketDTOs.TicketCreateDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "AssignSeatToTicket",
+    "RelativePath": "api/Tickets/AssignSeatToTicket/assign-seat",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticketId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      },
+      {
+        "Name": "seatId",
+        "Type": "System.Guid",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "CancelTicket",
+    "RelativePath": "api/Tickets/CancelTicket/cancel/{ticketId}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticketId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "GetAllTickets",
+    "RelativePath": "api/Tickets/GetAllTickets",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "GetByIdTicket",
+    "RelativePath": "api/Tickets/GetByIdTicket/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "GetDeletedTicket",
+    "RelativePath": "api/Tickets/GetDeletedTicket/deleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "GetPaginatedTicket",
+    "RelativePath": "api/Tickets/GetPaginatedTicket/paginated",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "page",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "size",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "GetTicketByPassenger",
+    "RelativePath": "api/Tickets/GetTicketByPassenger/by-passenger/{passengerId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "passengerId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "GetTicketByReservation",
+    "RelativePath": "api/Tickets/GetTicketByReservation/by-reservation/{reservationId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "reservationId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "HardDeleteTicket",
+    "RelativePath": "api/Tickets/HardDeleteTicket/hard/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "Recover",
+    "RelativePath": "api/Tickets/Recover/recover/{id}",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "SoftDeleteTicket",
+    "RelativePath": "api/Tickets/SoftDeleteTicket/soft/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "UpdateTicket",
+    "RelativePath": "api/Tickets/UpdateTicket/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "FlightReservation_Entities.DTOs.TicketDTOs.TicketUpdateDto",
         "IsRequired": true
       }
     ],

@@ -103,7 +103,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> HardDeleteAirlineAsync(Guid id)
         {
-            var existsAirline = await _unitOfWork.AirlineRepository.GetAsync(a => a.Id == id);
+            var existsAirline = await _unitOfWork.AirlineRepository.GetAsync(a => a.Id == id, includeDeleted: true);
             if (existsAirline == null)
                 throw new NotFoundException(ExceptionMessage.AirlineNotFound);
 
@@ -120,8 +120,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> RecoverAirlineAsync(Guid id)
         {
-            var airline = await _unitOfWork.AirlineRepository
-                .GetAsync(a => a.Id == id);
+            var airline = await _unitOfWork.AirlineRepository.GetAsync(a => a.Id == id, includeDeleted: true);
 
             if (airline == null)
                 throw new NotFoundException(ExceptionMessage.AirlineNotFound);

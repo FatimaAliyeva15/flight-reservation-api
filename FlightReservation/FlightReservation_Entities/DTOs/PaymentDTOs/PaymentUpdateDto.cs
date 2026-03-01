@@ -9,7 +9,6 @@ namespace FlightReservation_Entities.DTOs.PaymentDTOs
     public class PaymentUpdateDto: IDto
     {
         public decimal Amount { get; set; }
-        public string PaymentMethod { get; set; }
-        public PaymentStatus Status { get; set; }
+        public PaymentStatus? Status { get; set; }
     }
 }

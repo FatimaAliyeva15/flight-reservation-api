@@ -6,7 +6,7 @@ namespace FlightReservation_Entities.Enums
 {
     public enum ReservationStatus
     {
-        Pending,
+        PendingPayment,
         Confirmed,
         Cancelled,
         Refunded

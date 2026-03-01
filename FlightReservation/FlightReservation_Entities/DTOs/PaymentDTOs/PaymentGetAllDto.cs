@@ -12,8 +12,10 @@ namespace FlightReservation_Entities.DTOs.PaymentDTOs
         public Guid Id { get; set; }
         public decimal Amount { get; set; }
         public PaymentStatus Status { get; set; }
-        public string PaymentMethod { get; set; }
-        public DateTime PaymentDate { get; set; }
+        public DateTime? PaidAt { get; set; }
+        public DateTime? RefundedAt { get; set; }
+
         public Guid ReservationId { get; set; }
+        public string AppUserId { get; set; }
     }
 }

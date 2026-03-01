@@ -13,7 +13,7 @@ namespace FlightReservation_DataAccess.Configurations
         {
             builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
             builder.Property(x => x.Message).IsRequired().HasMaxLength(500);
-            builder.HasOne(x => x.User).WithMany(x => x.Notifications).HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Notifications).HasForeignKey(x => x.AppUserId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

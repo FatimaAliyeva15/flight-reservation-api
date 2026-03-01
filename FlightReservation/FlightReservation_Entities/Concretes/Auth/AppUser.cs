@@ -8,11 +8,7 @@ namespace FlightReservation_Core.Entities.Concrete.Auth
     public class AppUser: IdentityUser
     {
         public string FullName { get; set; }
-
         public bool IsActive { get; set; } = true;
-
-        public UserRole Role { get; set; }
-
         public ICollection<Reservation> Reservations { get; set; }
         public ICollection<Notification> Notifications { get; set; }
     }

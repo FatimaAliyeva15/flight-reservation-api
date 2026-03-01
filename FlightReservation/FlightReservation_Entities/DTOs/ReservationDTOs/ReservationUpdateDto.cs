@@ -8,6 +8,8 @@ namespace FlightReservation_Entities.DTOs.ReservationDTOs
 {
     public class ReservationUpdateDto: IDto
     {
-        public ReservationStatus Status { get; set; }
+        public ReservationStatus? Status { get; set; }
+        public bool? IsPaid { get; set; }
+        public DateTime ExpiresAt { get; set; }
     }
 }

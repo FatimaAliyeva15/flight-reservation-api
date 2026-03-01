@@ -5,9 +5,13 @@ using FlightReservation_Core.Business.Utilities.Exceptions;
 using FlightReservation_Core.Business.Utilities.Results.Abstract;
 using FlightReservation_Core.Business.Utilities.Results.Concrete;
 using FlightReservation_DataAccess.UnitOfWork.Abstract;
+using FlightReservation_Entities.Concretes;
+using FlightReservation_Entities.DTOs.AircraftDTOs;
 using FlightReservation_Entities.DTOs.TicketDTOs;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using System.Text;
 
 namespace FlighReservation_Business.Services.Concretes
@@ -23,9 +27,32 @@ namespace FlighReservation_Business.Services.Concretes
             _mapper = mapper;
         }
 
-        public Task<IResult> AddTicketAsync(TicketCreateDto createDto)
+        public async Task<IResult> AddTicketAsync(TicketCreateDto createDto)
         {
-            throw new NotImplementedException();
+            var flight = await _unitOfWork.FlightRepository.GetAsync(f => f.Id == createDto.FlightId);
+            if (flight == null)
+                throw new NotFoundException(ExceptionMessage.FlightNotFound);
+
+            var passenger = await _unitOfWork.PassengerRepository.GetAsync(p => p.Id == createDto.PassengerId);
+            if (passenger == null)
+                throw new NotFoundException(ExceptionMessage.PassengerNotFound);
+
+            var seat = await _unitOfWork.SeatRepository.GetAsync(s => s.Id == createDto.SeatId && !s.IsBooked);
+            if (seat == null)
+                return new ErrorResult("Seat is not available");
+
+            var ticket = _mapper.Map<Ticket>(createDto);
+            ticket.CreatedAt = DateTime.UtcNow;
+
+            await _unitOfWork.TicketRepository.AddAsync(ticket);
+            var result = await _unitOfWork.SaveAsync();
+
+            if (result == 0)
+            {
+                return new ErrorResult("Ticket not added");
+            }
+
+            return new SuccessResult("Ticket added");
         }
 
         public async Task<IResult> AssignSeatToTicketAsync(Guid ticketId, Guid seatId)
@@ -70,19 +97,46 @@ namespace FlighReservation_Business.Services.Concretes
             return result > 0 ? new SuccessResult("Ticket cancelled") : new ErrorResult("Ticket cancellation failed");
         }
 
-        public Task<IDataResult<List<TicketGetAllDto>>> GetAllDeletedTicketsAsync()
+        public async Task<IDataResult<List<TicketGetAllDto>>> GetAllDeletedTicketsAsync()
         {
-            throw new NotImplementedException();
+            var deletedTickets = await _unitOfWork.TicketRepository.GetDeletedAsync();
+
+            if (deletedTickets == null || deletedTickets.Count == 0)
+                return new ErrorDataResult<List<TicketGetAllDto>>(new List<TicketGetAllDto>(), "Deleted tickets not found");
+
+            var dtos = _mapper.Map<List<TicketGetAllDto>>(deletedTickets);
+            return new SuccessDataResult<List<TicketGetAllDto>>(dtos, "Deleted tickets retrieved successfully");
         }
 
-        public Task<IDataResult<List<TicketGetAllDto>>> GetAllTicketsAsync()
+        public async Task<IDataResult<List<TicketGetAllDto>>> GetAllTicketsAsync()
         {
-            throw new NotImplementedException();
+            var tickets = await _unitOfWork.TicketRepository.GetAllAsync();
+            if (tickets.Count == 0)
+                return new ErrorDataResult<List<TicketGetAllDto>>(new List<TicketGetAllDto>(), "Ticket not founded");
+
+            var dtos = _mapper.Map<List<TicketGetAllDto>>(tickets);
+            return new SuccessDataResult<List<TicketGetAllDto>>(dtos, "Tickets founded");
         }
 
-        public Task<IDataResult<List<TicketGetAllDto>>> GetAllTicketsPaginatedAsync(int page, int size)
+        public async Task<IDataResult<List<TicketGetAllDto>>> GetAllTicketsPaginatedAsync(int page, int size)
         {
-            throw new NotImplementedException();
+            if (page <= 0 || size <= 0)
+                return new ErrorDataResult<List<TicketGetAllDto>>(
+                    new List<TicketGetAllDto>(),
+                    "Page or size invalid");
+
+            var tickets = await _unitOfWork.TicketRepository.GetAllPaginatedAsync(page, size, null, "Flight", "Passenger", "Reservation", "Seat");
+
+            if (tickets.Count == 0)
+                return new ErrorDataResult<List<TicketGetAllDto>>(
+                    new List<TicketGetAllDto>(),
+                    "No ticket found");
+
+            var dtos = _mapper.Map<List<TicketGetAllDto>>(tickets);
+
+            return new SuccessDataResult<List<TicketGetAllDto>>(
+                dtos,
+                "Tickets listed with pagination");
         }
 
         public Task<IDataResult<TicketGetDto>> GetTicketByIdAsync(Guid id)
@@ -104,24 +158,73 @@ namespace FlighReservation_Business.Services.Concretes
             return new SuccessDataResult<List<TicketGetAllDto>>(dtos, "Tickets retrieved for reservation");
         }
 
-        public Task<IResult> HardDeleteTicketAsync(Guid id)
+        public async Task<IResult> HardDeleteTicketAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existsTicket = await _unitOfWork.TicketRepository.GetAsync(a => a.Id == id, includeDeleted: true);
+            if (existsTicket == null)
+                throw new NotFoundException(ExceptionMessage.TicketNotFound);
+
+            await _unitOfWork.TicketRepository.HardDeleteAsync(existsTicket);
+            var result = await _unitOfWork.SaveAsync();
+
+            if (result == 0)
+            {
+                return new ErrorResult("Ticket not permanently deleted");
+            }
+
+            return new SuccessResult("Ticket permanently deleted");
         }
 
-        public Task<IResult> RecoverTicketAsync(Guid id)
+        public async Task<IResult> RecoverTicketAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var ticket = await _unitOfWork.TicketRepository.GetAsync(a => a.Id == id, includeDeleted: true);
+
+            if (ticket == null)
+                throw new NotFoundException(ExceptionMessage.TicketNotFound);
+
+            await _unitOfWork.TicketRepository.RecoverAsync(ticket);
+
+            var result = await _unitOfWork.SaveAsync();
+
+            if (result == 0)
+                return new ErrorResult("Ticket not recovered");
+
+            return new SuccessResult("Ticket recovered");
         }
 
-        public Task<IResult> SoftDeleteTicketAsync(Guid id)
+        public async Task<IResult> SoftDeleteTicketAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existsTicket = await _unitOfWork.TicketRepository.GetAsync(a => a.Id == id);
+
+            if (existsTicket == null)
+                throw new NotFoundException(ExceptionMessage.TicketNotFound);
+
+            await _unitOfWork.TicketRepository.SoftDeleteAsync(existsTicket);
+
+            var result = await _unitOfWork.SaveAsync();
+
+            if (result == 0)
+                return new ErrorResult("Ticket not deleted");
+
+            return new SuccessResult("Ticket softdeleted");
         }
 
-        public Task<IResult> UpdateTicketAsync(Guid id, TicketUpdateDto updateDto)
+        public async Task<IResult> UpdateTicketAsync(Guid id, TicketUpdateDto updateDto)
         {
-            throw new NotImplementedException();
+            var ticket = await _unitOfWork.TicketRepository.GetAsync(a => a.Id == id);
+            if (ticket == null)
+                throw new NotFoundException(ExceptionMessage.TicketNotFound);
+
+            ticket.SeatId = updateDto.SeatId != Guid.Empty ? updateDto.SeatId : ticket.SeatId;
+            ticket.UpdatedAt = DateTime.UtcNow;
+
+            await _unitOfWork.TicketRepository.Update(ticket);
+            var result = await _unitOfWork.SaveAsync();
+
+            if (result == 0)
+                return new ErrorResult("Ticket not updated");
+
+            return new SuccessResult("Ticket updated");
         }
     }
 }

@@ -11,17 +11,20 @@ namespace FlightReservation_Entities.Concretes
     public class Reservation: BaseEntity, IEntity
     {
         public decimal TotalPrice { get; set; }
-        public ReservationStatus Status { get; set; } = ReservationStatus.Pending;
+        public ReservationStatus Status { get; set; } = ReservationStatus.PendingPayment;
+        public bool IsPaid { get; set; }
+        public DateTime? PaidAt { get; set; }
+        public DateTime? CancelledAt { get; set; }
+        public DateTime? RefundedAt { get; set; }
+        public DateTime ExpiresAt { get; set; } 
 
         public Guid FlightId { get; set; }
         public Flight Flight { get; set; }
 
-        public Guid UserId { get; set; }
-        public AppUser User { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
 
         public ICollection<Ticket> Tickets { get; set; }
-
-        public ICollection<Payment> Payments { get; set; }
 
     }
 }

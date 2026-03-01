@@ -11,10 +11,11 @@ namespace FlightReservation_DataAccess.Configurations
     {
         public void Configure(EntityTypeBuilder<Payment> builder)
         {
-            builder.Property(x => x.Amount).HasColumnType("decimal(18,2)");
-            builder.Property(x => x.Status).HasConversion<string>();
-            builder.Property(x => x.PaymentMethod).IsRequired().HasMaxLength(50);
-            builder.HasOne(x => x.Reservation).WithMany(x => x.Payments).HasForeignKey(x => x.ReservationId).OnDelete(DeleteBehavior.Cascade);
+            builder.Property(p => p.Amount).HasColumnType("decimal(18,2)");
+            builder.Property(p => p.Status).HasConversion<string>();
+            builder.Property(p => p.PaidAt).IsRequired(false);
+            builder.Property(p => p.RefundedAt).IsRequired(false);
+
         }
     }
 }

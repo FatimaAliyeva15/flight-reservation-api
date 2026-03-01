@@ -100,11 +100,19 @@ namespace FlightReservation_Core.DataAccess.Concrete
             return await _entities.AnyAsync(e => e.Id == id && !(e as BaseEntity).IsDeleted);
         }
 
-        public Task<List<TEntity>> GetDeletedAsync()
+        public Task<List<TEntity>> GetDeletedAsync(params string[] includes)
         {
-            return _context.Set<TEntity>()
-                   .Where(x => x.IsDeleted)
-                   .ToListAsync();
+            IQueryable<TEntity> query = _context.Set<TEntity>().Where(x => x.IsDeleted);
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
+                {
+                    query = query.Include(include);
+                }
+            }
+
+            return query.ToListAsync();
         }
     }
 }

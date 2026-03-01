@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using FlighReservation_Business.Services.Abstracts;
 using FlighReservation_Business.Utilities.Constants;
 using FlightReservation_Core.Business.Utilities.Exceptions;
@@ -96,15 +97,14 @@ namespace FlighReservation_Business.Services.Concretes
 
             var dto = _mapper.Map<NotificationGetDto>(notification);
 
-            dto.UserName = notification.User?.UserName;
+            dto.UserName = notification.AppUser?.UserName;
 
             return new SuccessDataResult<NotificationGetDto>(dto, "Notification found");
         }
 
         public async Task<IResult> HardDeleteNotificationAsync(Guid id)
         {
-            var notification = await _unitOfWork.NotificationRepository
-            .GetAsync(n => n.Id == id);
+            var notification = await _unitOfWork.NotificationRepository.GetAsync(n => n.Id == id, includeDeleted: true);
 
             if (notification == null)
                 throw new NotFoundException(ExceptionMessage.NotificationNotFound);

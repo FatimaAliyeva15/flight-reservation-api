@@ -8,6 +8,7 @@ namespace FlightReservation_Entities.Enums
     {
         Pending,
         Paid,
+        Completed,
         Failed,
         Refunded
     }

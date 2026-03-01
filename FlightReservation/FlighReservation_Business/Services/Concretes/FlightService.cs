@@ -8,6 +8,7 @@ using FlightReservation_Core.Entities.Abstract;
 using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using FlightReservation_Entities.Concretes;
 using FlightReservation_Entities.DTOs.FlightDTOs;
+using FlightReservation_Entities.DTOs.PaymentDTOs;
 using FlightReservation_Entities.Enums;
 using System;
 using System.Collections.Generic;
@@ -28,8 +29,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> AddFlightAsync(FlightCreateDto createDto)
         {
-            var aircraft = await _unitOfWork.AircraftRepository
-        .GetAsync(a => a.Id == createDto.AircraftId);
+            var aircraft = await _unitOfWork.AircraftRepository.GetAsync(a => a.Id == createDto.AircraftId);
 
             if (aircraft == null)
                 throw new NotFoundException(ExceptionMessage.AircraftNotFound);
@@ -124,31 +124,7 @@ namespace FlighReservation_Business.Services.Concretes
             if (deletedFlights.Count == 0)
                 return new ErrorDataResult<List<FlightGetAllDto>>(new List<FlightGetAllDto>(), "Deleted flights not found");
 
-            var dtos = deletedFlights.Select(f => new FlightGetAllDto
-            {
-                Id = f.Id,
-                FlightNumber = f.FlightNumber,
-                Price = f.Price,
-                AdminComment = f.AdminComment,
-                Status = f.Status,
-                DepartureTime = f.DepartureTime,
-                ArrivalTime = f.ArrivalTime,
-
-                AirlineId = f.AirlineId,
-                AirlineName = f.Airline?.Name,
-
-                AircraftId = f.AircraftId,
-                AircraftModel = f.Aircraft?.Model,
-
-                DepartureAirportId = f.DepartureAirportId,
-                DepartureAirportName = f.DepartureAirport?.Name,
-
-                ArrivalAirportId = f.ArrivalAirportId,
-                ArrivalAirportName = f.ArrivalAirport?.Name,
-
-                TotalSeats = f.Seats?.Count ?? 0,
-                AvailableSeats = f.Seats?.Count(s => !s.IsBooked) ?? 0
-            }).ToList();
+            var dtos = _mapper.Map<List<FlightGetAllDto>>(deletedFlights);
 
             return new SuccessDataResult<List<FlightGetAllDto>>(dtos, "Deleted flights retrieved successfully");
         }
@@ -160,38 +136,12 @@ namespace FlighReservation_Business.Services.Concretes
                  "Aircraft",
                  "DepartureAirport",
                  "ArrivalAirport",
-                 "Seats"
-   );
+                 "Seats");
 
             if (flights.Count == 0)
                 return new ErrorDataResult<List<FlightGetAllDto>>(new List<FlightGetAllDto>(), "Flights not found");
 
-            var dtos = flights.Select(f => new FlightGetAllDto
-            {
-                Id = f.Id,
-                FlightNumber = f.FlightNumber,
-                Price = f.Price,
-                AdminComment = f.AdminComment,
-                Status = f.Status,
-                DepartureTime = f.DepartureTime,
-                ArrivalTime = f.ArrivalTime,
-
-                AirlineId = f.AirlineId,
-                AirlineName = f.Airline?.Name,
-
-                AircraftId = f.AircraftId,
-                AircraftModel = f.Aircraft?.Model,
-
-                DepartureAirportId = f.DepartureAirportId,
-                DepartureAirportName = f.DepartureAirport?.Name,
-
-                ArrivalAirportId = f.ArrivalAirportId,
-                ArrivalAirportName = f.ArrivalAirport?.Name,
-
-                TotalSeats = f.Seats?.Count ?? 0,
-                AvailableSeats = f.Seats?.Count(s => !s.IsBooked) ?? 0
-            }).ToList();
-
+            var dtos = _mapper.Map<List<FlightGetAllDto>>(flights);
             return new SuccessDataResult<List<FlightGetAllDto>>(dtos, "Flights retrieved successfully");
         }
 
@@ -211,31 +161,7 @@ namespace FlighReservation_Business.Services.Concretes
             if (flights.Count == 0)
                 return new ErrorDataResult<List<FlightGetAllDto>>(new List<FlightGetAllDto>(), "No flights found");
 
-            var dtos = flights.Select(f => new FlightGetAllDto
-            {
-                Id = f.Id,
-                FlightNumber = f.FlightNumber,
-                Price = f.Price,
-                AdminComment = f.AdminComment,
-                Status = f.Status,
-                DepartureTime = f.DepartureTime,
-                ArrivalTime = f.ArrivalTime,
-
-                AirlineId = f.AirlineId,
-                AirlineName = f.Airline?.Name,
-
-                AircraftId = f.AircraftId,
-                AircraftModel = f.Aircraft?.Model,
-
-                DepartureAirportId = f.DepartureAirportId,
-                DepartureAirportName = f.DepartureAirport?.Name,
-
-                ArrivalAirportId = f.ArrivalAirportId,
-                ArrivalAirportName = f.ArrivalAirport?.Name,
-
-                TotalSeats = f.Seats?.Count ?? 0,
-                AvailableSeats = f.Seats?.Count(s => !s.IsBooked) ?? 0
-            }).ToList();
+            var dtos = _mapper.Map<List<FlightGetAllDto>>(flights);
 
             return new SuccessDataResult<List<FlightGetAllDto>>(dtos, "Flights retrieved with pagination");
         }
@@ -328,14 +254,12 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> SoftDeleteFlightAsync(Guid id)
         {
-            var flight = await _unitOfWork.FlightRepository
-        .GetAsync(f => f.Id == id);
+            var flight = await _unitOfWork.FlightRepository.GetAsync(f => f.Id == id);
 
             if (flight == null)
                 throw new NotFoundException(ExceptionMessage.FlightNotFound);
 
-            flight.IsDeleted = true;
-
+            await _unitOfWork.FlightRepository.SoftDeleteAsync(flight);
             var result = await _unitOfWork.SaveAsync();
 
             if (result == 0)

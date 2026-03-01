@@ -21,5 +21,6 @@ namespace FlighReservation_Business.Services.Abstracts
         Task<IDataResult<List<TicketGetAllDto>>> GetTicketsByReservationAsync(Guid reservationId);
         Task<IResult> CancelTicketAsync(Guid ticketId);
         Task<IDataResult<List<TicketGetAllDto>>> GetTicketsByPassengerAsync(Guid passengerId);
+
     }
 }

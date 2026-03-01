@@ -82,7 +82,7 @@ namespace FlightReservation.Controllers
         
 
         
-        [HttpPut("recover/{id}")]
+        [HttpPatch("recover/{id}")]
         public async Task<IActionResult> RecoverFlight(Guid id)
         {
             var result = await _flightService.RecoverFlightAsync(id);
@@ -112,7 +112,7 @@ namespace FlightReservation.Controllers
             return Ok(result);
         }
 
-        [HttpPut("{id}/cancel")]
+        [HttpPatch("{id}/cancel")]
         public async Task<IActionResult> CancelFlight(Guid id)
         {
             var result = await _flightService.CancelFlightAsync(id);

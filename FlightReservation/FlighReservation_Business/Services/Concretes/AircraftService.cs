@@ -51,7 +51,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> HardDeleteAircraftAsync(Guid id)
         {
-            var existsAircraft = await _unitOfWork.AircraftRepository.GetAsync(a => a.Id == id);
+            var existsAircraft = await _unitOfWork.AircraftRepository.GetAsync(a => a.Id == id, includeDeleted: true);
             if (existsAircraft == null)
                 throw new NotFoundException(ExceptionMessage.AircraftNotFound);
 
@@ -60,10 +60,10 @@ namespace FlighReservation_Business.Services.Concretes
 
             if(result == 0)
             {
-                return new ErrorResult("Aircraft not deleted");
+                return new ErrorResult("Aircraft not permanently deleted");
             }
 
-            return new SuccessResult("Aircraft deleted");
+            return new SuccessResult("Aircraft permanently deleted");
         }
 
         public async Task<IDataResult<AircraftGetDto>> GetAircraftByIdAsync(Guid id)
@@ -79,7 +79,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<AircraftGetAllDto>>> GetAllAircraftsAsync()
         {
-            var aircrafts = await _unitOfWork.AircraftRepository.GetAllAsync();
+            var aircrafts = await _unitOfWork.AircraftRepository.GetAllAsync(null, "Airline");
             if (aircrafts.Count == 0)
                 return new ErrorDataResult<List<AircraftGetAllDto>>(new List<AircraftGetAllDto>(), "Aircraft not founded");
 
@@ -91,13 +91,12 @@ namespace FlighReservation_Business.Services.Concretes
         {
 
             var aircraft = await _unitOfWork.AircraftRepository
-                .GetAsync(a => a.Id == id);
+                .GetAsync(a => a.Id == id, includeDeleted: true);
 
             if (aircraft == null)
                 throw new NotFoundException(ExceptionMessage.AircraftNotFound);
 
-            await _unitOfWork.AircraftRepository
-                .RecoverAsync(aircraft);
+            await _unitOfWork.AircraftRepository.RecoverAsync(aircraft);
 
             var result = await _unitOfWork.SaveAsync();
 
@@ -139,7 +138,7 @@ namespace FlighReservation_Business.Services.Concretes
             var result = await _unitOfWork.SaveAsync();
 
             if (result == 0)
-                return new ErrorResult("Aircraft not softdeleted");
+                return new ErrorResult("Aircraft not updated");
 
             return new SuccessResult("Aircraft updated");
         }
@@ -168,7 +167,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<AircraftGetAllDto>>> GetAllDeletedAircraftsAsync()
         {
-            var deletedAircrafts = await _unitOfWork.AircraftRepository.GetDeletedAsync();
+            var deletedAircrafts = await _unitOfWork.AircraftRepository.GetDeletedAsync("Airline");
 
             if (deletedAircrafts == null || deletedAircrafts.Count == 0)
                 return new ErrorDataResult<List<AircraftGetAllDto>>(new List<AircraftGetAllDto>(), "Deleted aircrafts not found");

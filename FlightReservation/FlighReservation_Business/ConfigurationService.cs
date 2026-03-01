@@ -33,6 +33,8 @@ namespace FlighReservation_Business
             services.AddScoped<IFlightService, FlightService>();
             services.AddScoped<ISeatService, SeatService>();
             services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IReservationService, ReservationService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
 
 

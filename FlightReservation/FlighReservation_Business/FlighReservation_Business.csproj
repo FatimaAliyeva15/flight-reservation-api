@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Validators\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\FlightReservation_DataAccess\FlightReservation_DataAccess.csproj" />
     <ProjectReference Include="..\FlightReservation_Entities\FlightReservation_Entities.csproj" />
   </ItemGroup>

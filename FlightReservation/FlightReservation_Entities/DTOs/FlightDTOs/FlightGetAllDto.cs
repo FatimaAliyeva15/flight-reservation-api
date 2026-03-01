@@ -18,7 +18,6 @@ namespace FlightReservation_Entities.DTOs.FlightDTOs
         public DateTime ArrivalTime { get; set; }
         public FlightStatus Status { get; set; }
 
-
         public Guid AirlineId { get; set; }
         public string AirlineName { get; set; }
 

@@ -12,8 +12,7 @@ namespace FlightReservation_Entities.DTOs.TicketDTOs
     {
         public Guid Id { get; set; }
         public decimal Price { get; set; }
-        public FlightGetDto Flight { get; set; }
-        public PassengerGetDto Passenger { get; set; }
-        public SeatGetDto Seat { get; set; }
+        public string PassengerName { get; set; }
+        public string SeatNumber { get; set; }
     }
 }

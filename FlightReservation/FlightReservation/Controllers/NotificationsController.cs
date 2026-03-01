@@ -54,7 +54,7 @@ namespace FlightReservation.Controllers
             return Ok(result.Message);
         }
 
-        [HttpPut("recover/{id:guid}")]
+        [HttpPatch("recover/{id:guid}")]
         public async Task<IActionResult> RecoverNotification(Guid id)
         {
             var result = await _notificationService.RecoverNotificationAsync(id);

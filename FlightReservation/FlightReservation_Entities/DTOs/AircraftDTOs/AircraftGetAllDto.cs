@@ -11,6 +11,6 @@ namespace FlightReservation_Entities.DTOs.AircraftDTOs
         public Guid Id { get; set; }
         public string Model { get; set; }
         public int Capacity { get; set; }
-        public AirlineGetDto Airline { get; set; }
+        public string AirlineName { get; set; }
     }
 }

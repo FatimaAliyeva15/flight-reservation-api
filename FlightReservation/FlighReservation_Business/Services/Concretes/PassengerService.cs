@@ -104,7 +104,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> HardDeletePassengerAsync(Guid id)
         {
-            var existsPassenger = await _unitOfWork.PassengerRepository.GetAsync(a => a.Id == id);
+            var existsPassenger = await _unitOfWork.PassengerRepository.GetAsync(a => a.Id == id, includeDeleted: true);
             if (existsPassenger == null)
                 throw new NotFoundException(ExceptionMessage.PassengerNotFound);
 
@@ -122,7 +122,7 @@ namespace FlighReservation_Business.Services.Concretes
         public async Task<IResult> RecoverPassengerAsync(Guid id)
         {
             var passenger = await _unitOfWork.PassengerRepository
-                .GetAsync(a => a.Id == id);
+                .GetAsync(a => a.Id == id, includeDeleted: true);
 
             if (passenger == null)
                 throw new NotFoundException(ExceptionMessage.PassengerNotFound);

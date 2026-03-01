@@ -14,8 +14,8 @@ namespace FlightReservation_Entities.Concretes
         public bool IsRead { get; set; } = false;
         public DateTime SentAt { get; set; } = DateTime.UtcNow;
 
-        public Guid UserId { get; set; }
-        public AppUser User { get; set; }
+        public string AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
 
     }
 }
