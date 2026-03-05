@@ -1,4 +1,5 @@
-﻿using FlightReservation_Core.Entities.Abstract;
+﻿
+using FlightReservation_Core.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Text;

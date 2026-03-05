@@ -4,11 +4,9 @@ using FlighReservation_Business.Utilities.Constants;
 using FlightReservation_Core.Business.Utilities.Exceptions;
 using FlightReservation_Core.Business.Utilities.Results.Abstract;
 using FlightReservation_Core.Business.Utilities.Results.Concrete;
-using FlightReservation_Core.Entities.Abstract;
 using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using FlightReservation_Entities.Concretes;
 using FlightReservation_Entities.DTOs.FlightDTOs;
-using FlightReservation_Entities.DTOs.PaymentDTOs;
 using FlightReservation_Entities.Enums;
 using System;
 using System.Collections.Generic;
@@ -54,7 +52,7 @@ namespace FlighReservation_Business.Services.Concretes
                     FlightId = flight.Id,
                     SeatNumber = i.ToString(),
                     Class = SeatClass.Economy,
-                    IsBooked = true,
+                    IsBooked = false,
                     CreatedAt = DateTime.UtcNow
                 };
 

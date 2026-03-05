@@ -18,16 +18,12 @@ namespace FlightReservation_Entities.DTOs.FlightDTOs
         public DateTime ArrivalTime { get; set; }
         public FlightStatus Status { get; set; }
 
-        public Guid AirlineId { get; set; }
         public string AirlineName { get; set; }
 
-        public Guid AircraftId { get; set; }
         public string AircraftModel { get; set; }
 
-        public Guid DepartureAirportId { get; set; }
         public string DepartureAirportName { get; set; }
 
-        public Guid ArrivalAirportId { get; set; }
         public string ArrivalAirportName { get; set; }
 
         public int TotalSeats { get; set; }

@@ -1,6 +1,9 @@
 ﻿using FlighReservation_Business.Services.Abstracts;
+using FlighReservation_Business.Services.Abstracts.IAuthService;
 using FlighReservation_Business.Services.Concretes;
+using FlighReservation_Business.Services.Concretes.AuthService;
 using FlighReservation_Business.Utilities.Profilies;
+using FlightReservation_Core.Entities.Concrete.Auth;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
@@ -35,6 +38,11 @@ namespace FlighReservation_Business
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<IReservationService, ReservationService>();
             services.AddScoped<IPaymentService, PaymentService>();
+
+            services.Configure<TokenOption>(configuration.GetSection("TokenOptions"));
+
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IEmailSender, SmtpEmailSender>();
 
 
 

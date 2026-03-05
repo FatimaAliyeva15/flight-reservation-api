@@ -12,7 +12,7 @@ namespace FlightReservation_Entities.Concretes
     {
         public string FlightNumber { get; set; }
         public decimal Price { get; set; }
-        public string AdminComment { get; set; }
+        public string? AdminComment { get; set; }
         public DateTime DepartureTime { get; set; }
         public DateTime ArrivalTime { get; set; }
         public FlightStatus Status { get; set; } = FlightStatus.PendingApproval;

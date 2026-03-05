@@ -22,64 +22,82 @@ namespace FlightReservation.Controllers
         public async Task<IActionResult> GetAllSeats()
         {
             var result = await _seatService.GetAllSeatsAsync();
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return NotFound(result.Message);
+            return Ok(result.Data);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdSeat(Guid id)
         {
             var result = await _seatService.GetSeatByIdAsync(id);
-            return result.Success ? Ok(result.Message) : NotFound(result.Message);
+            if (!result.Success)
+                return NotFound(result.Message);
+            return Ok(result.Data);
         }
 
         [HttpGet("paginated")]
         public async Task<IActionResult> GetPaginatedSeat(int page, int size)
         {
             var result = await _seatService.GetAllSeatsPaginatedAsync(page, size);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return NotFound(result.Message);
+            return Ok(result.Data);
         }
 
         [HttpGet("deleted")]
         public async Task<IActionResult> GetDeletedSeat()
         {
             var result = await _seatService.GetAllDeletedSeatsAsync();
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return NotFound(result.Message);
+            return Ok(result.Data);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddSeat(SeatCreateDto dto)
         {
             var result = await _seatService.AddSeatAsync(dto);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
-            
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
+
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSeat(Guid id, SeatUpdateDto dto)
         {
             var result = await _seatService.UpdateSeatAsync(id, dto);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
         }
 
         [HttpDelete("soft/{id}")]
         public async Task<IActionResult> SoftDeleteSeat(Guid id)
         {
             var result = await _seatService.SoftDeleteSeatAsync(id);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
         }
 
         [HttpDelete("hard/{id}")]
         public async Task<IActionResult> HardDeleteSeat(Guid id)
         {
             var result = await _seatService.HardDeleteSeatAsync(id);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
         }
 
         [HttpPatch("recover/{id}")]
         public async Task<IActionResult> RecoverSeat(Guid id)
         {
             var result = await _seatService.RecoverSeatAsync(id);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
         }
 
 
@@ -87,28 +105,36 @@ namespace FlightReservation.Controllers
         public async Task<IActionResult> ReserveSeat(Guid seatId, Guid reservationId)
         {
             var result = await _seatService.ReserveSeatAsync(seatId, reservationId);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if(!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
         }
 
         [HttpPatch("book")]
         public async Task<IActionResult> BookSeat(Guid seatId, Guid reservationId)
         {
             var result = await _seatService.BookSeatAsync(seatId, reservationId);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
         }
 
         [HttpPatch("release/{seatId}")]
         public async Task<IActionResult> ReleaseSeat(Guid seatId)
         {
             var result = await _seatService.ReleaseSeatAsync(seatId);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
         }
 
         [HttpGet("by-flight/{flightId}")]
         public async Task<IActionResult> GetSeatsByFlight(Guid flightId, bool onlyAvailable = false)
         {
             var result = await _seatService.GetSeatsByFlightAsync(flightId, onlyAvailable);
-            return result.Success ? Ok(result.Message) : BadRequest(result.Message);
+            if (!result.Success)
+                return NotFound(result.Message);
+            return Ok(result.Data);
         }
     }
 }

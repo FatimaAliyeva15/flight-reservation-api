@@ -80,7 +80,7 @@ namespace FlightReservation.Controllers
             return Ok(result);
         }
 
-        [HttpPatch("soft-delete/{id}")]
+        [HttpDelete("soft-delete/{id}")]
         public async Task<IActionResult> SoftDeleteReservation(Guid id)
         {
             var result = await _reservationService.SoftDeleteReservationAsync(id);
@@ -115,7 +115,7 @@ namespace FlightReservation.Controllers
             return Ok(result);
         }
 
-        [HttpPost("cancel/{id}")]
+        [HttpPatch("cancel/{id}")]
         public async Task<IActionResult> CancelReservation(Guid id)
         {
             var result = await _reservationService.CancelReservationAsync(id);

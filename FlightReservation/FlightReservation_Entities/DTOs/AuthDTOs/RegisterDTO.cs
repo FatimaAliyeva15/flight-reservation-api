@@ -1,8 +1,9 @@
-﻿using FlightReservation_Core.Enums.Auth;
+﻿using FlightReservation_Core.Entities.Abstract;
+using FlightReservation_Core.Enums.Auth;
 
 namespace FlightReservation_Entities.DTOs.AuthDTOs
 {
-    public class RegisterDTO
+    public class RegisterDTO: IDto
     {
         public string FullName { get; set; }
 

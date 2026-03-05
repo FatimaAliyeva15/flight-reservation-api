@@ -179,8 +179,8 @@ namespace FlightReservation_DataAccess.Migrations
 
                     b.Property<string>("IATACode")
                         .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasMaxLength(3)
+                        .HasColumnType("nvarchar(3)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -208,7 +208,6 @@ namespace FlightReservation_DataAccess.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AdminComment")
-                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 

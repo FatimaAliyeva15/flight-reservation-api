@@ -32,7 +32,9 @@ namespace FlightReservation_Core.DataAccess.Concrete
         {
             IQueryable<TEntity> query = _context.Set<TEntity>();
 
-            if (!includeDeleted)
+            if (includeDeleted)
+                query = query.IgnoreQueryFilters();  
+            else
                 query = query.Where(x => !x.IsDeleted);
 
             if (includes != null)
