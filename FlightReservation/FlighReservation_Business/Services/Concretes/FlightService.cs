@@ -51,8 +51,8 @@ namespace FlighReservation_Business.Services.Concretes
                 {
                     FlightId = flight.Id,
                     SeatNumber = i.ToString(),
-                    Class = SeatClass.Economy,
-                    IsBooked = false,
+                    Class = seatClass,
+                    Status = SeatStatus.Available,
                     CreatedAt = DateTime.UtcNow
                 };
 
@@ -170,7 +170,9 @@ namespace FlighReservation_Business.Services.Concretes
              "Airline",
              "Aircraft",
              "DepartureAirport",
-             "ArrivalAirport");
+             "ArrivalAirport",
+             "Seats",
+             "Tickets");
 
             if (flight == null)
                 return new ErrorDataResult<FlightGetDto>("Flight not found");
@@ -182,7 +184,7 @@ namespace FlighReservation_Business.Services.Concretes
             dto.DepartureAirportName = flight.DepartureAirport?.Name;
             dto.ArrivalAirportName = flight.ArrivalAirport?.Name;
             dto.TotalSeats = flight.Seats?.Count ?? 0;
-            dto.AvailableSeats = flight.Seats?.Count(s => !s.IsBooked) ?? 0;
+            dto.AvailableSeats = flight.Seats?.Count(s => s.Status == SeatStatus.Available) ?? 0;
 
             return new SuccessDataResult<FlightGetDto>(dto, "Flight found");
         }

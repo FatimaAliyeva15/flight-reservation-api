@@ -1,13 +1,12 @@
 ﻿using FlighReservation_Business.Services.Abstracts.IAuthService;
-using FlighReservation_Business.Services.Concretes.AuthService;
 using FlightReservation_Entities.DTOs.AuthDTOs;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32;
+
+
 
 namespace FlightReservation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     {

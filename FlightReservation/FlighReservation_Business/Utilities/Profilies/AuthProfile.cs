@@ -15,6 +15,8 @@ namespace FlighReservation_Business.Utilities.Profilies
               .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
               .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
               .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.FullName));
+
+            CreateMap<LoginDto, AppUser>();
         }
     }
 }

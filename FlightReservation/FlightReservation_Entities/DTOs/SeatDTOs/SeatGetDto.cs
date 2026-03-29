@@ -11,7 +11,7 @@ namespace FlightReservation_Entities.DTOs.SeatDTOs
     {
         public string SeatNumber { get; set; }
         public SeatClass Class { get; set; }
-        public bool IsBooked { get; set; }
+        public SeatStatus Status { get; set; }
         public Guid FlightId { get; set; }
         public Guid? TicketId { get; set; }
     }

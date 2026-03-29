@@ -7,9 +7,9 @@ namespace FlightReservation_Entities.DTOs.TicketDTOs
 {
     public class TicketCreateDto: IDto
     {
-        public Guid FlightId { get; set; }
+       // public Guid FlightId { get; set; }
         public Guid PassengerId { get; set; }
-        public Guid SeatId { get; set; }
+       // public Guid SeatId { get; set; }
         public Guid ReservationId { get; set; }
     }
 }

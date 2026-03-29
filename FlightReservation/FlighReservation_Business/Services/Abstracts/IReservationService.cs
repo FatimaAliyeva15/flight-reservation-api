@@ -13,7 +13,7 @@ namespace FlighReservation_Business.Services.Abstracts
         Task<IDataResult<ReservationGetDto>> GetReservationByIdAsync(Guid id);
         Task<IDataResult<List<ReservationGetAllDto>>> GetAllReservationsPaginatedAsync(int page, int size);
         Task<IDataResult<List<ReservationGetAllDto>>> GetAllDeletedReservationsAsync();
-        Task<IResult> AddReservationAsync(ReservationCreateDto createDto);
+        Task<IResult> AddReservationAsync(ReservationCreateDto createDto, string userId);
         Task<IResult> UpdateReservationAsync(Guid id, ReservationUpdateDto updateDto);
         Task<IResult> SoftDeleteReservationAsync(Guid id);
         Task<IResult> HardDeleteReservationAsync(Guid id);

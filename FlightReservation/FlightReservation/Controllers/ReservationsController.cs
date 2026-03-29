@@ -1,14 +1,17 @@
 ﻿using FlighReservation_Business.Services.Abstracts;
 using FlighReservation_Business.Services.Concretes;
 using FlightReservation_Entities.DTOs.ReservationDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FlightReservation.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class ReservationsController : ControllerBase
     {
         private readonly IReservationService _reservationService;
@@ -18,6 +21,7 @@ namespace FlightReservation.Controllers
             _reservationService = reservationService;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAllReservations()
         {
@@ -30,6 +34,7 @@ namespace FlightReservation.Controllers
         
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin,Operator")]
         public async Task<IActionResult> GetReservationById(Guid id)
         {
             var result = await _reservationService.GetReservationByIdAsync(id);
@@ -40,6 +45,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("paginated")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetPaginatedReservation([FromQuery] int page, [FromQuery] int size)
         {
             var result = await _reservationService.GetAllReservationsPaginatedAsync(page, size);
@@ -50,6 +56,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("deleted")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetDeletedReservation()
         {
             var result = await _reservationService.GetAllDeletedReservationsAsync();
@@ -59,10 +66,15 @@ namespace FlightReservation.Controllers
             return Ok(result);
         }
 
+        
         [HttpPost]
+        [Authorize(Roles = "Customer, Admin")]
         public async Task<IActionResult> AddReservation([FromBody] ReservationCreateDto createDto)
         {
-            var result = await _reservationService.AddReservationAsync(createDto);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var result = await _reservationService.AddReservationAsync(createDto, userId);
+
             if (!result.Success)
                 return NotFound(result.Message);
 
@@ -71,6 +83,7 @@ namespace FlightReservation.Controllers
             
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Customer,Operator")]
         public async Task<IActionResult> UpdateReservation(Guid id, [FromBody] ReservationUpdateDto updateDto)
         {
             var result = await _reservationService.UpdateReservationAsync(id, updateDto);
@@ -81,6 +94,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpDelete("soft-delete/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SoftDeleteReservation(Guid id)
         {
             var result = await _reservationService.SoftDeleteReservationAsync(id);
@@ -90,11 +104,19 @@ namespace FlightReservation.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> HardDeleteReservation(Guid id) =>
-            Ok(await _reservationService.HardDeleteReservationAsync(id));
+        public async Task<IActionResult> HardDeleteReservation(Guid id)
+        {
+            var result = await _reservationService.HardDeleteReservationAsync(id);
+            if (!result.Success)
+                return NotFound(result.Message);
+
+            return Ok(result);
+        }
 
         [HttpPatch("recover/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RecoverReservation(Guid id)
         {
             var result = await _reservationService.RecoverReservationAsync(id);
@@ -106,6 +128,7 @@ namespace FlightReservation.Controllers
             
 
         [HttpPost("create-with-tickets")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> CreateReservationWithTickets([FromBody] ReservationWithTicketsDto dto)
         {
             var result = await _reservationService.CreateReservationWithTicketsAsync(dto.Reservation, dto.Tickets);
@@ -116,6 +139,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPatch("cancel/{id}")]
+        [Authorize(Roles = "Customer,Operator")]
         public async Task<IActionResult> CancelReservation(Guid id)
         {
             var result = await _reservationService.CancelReservationAsync(id);
@@ -126,17 +150,20 @@ namespace FlightReservation.Controllers
         }
 
 
-        [HttpGet("by-passenger/{userId}")]
-        public async Task<IActionResult> GetReservationByPassenger(string userId)
+        [HttpGet("my-reservations")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> GetMyReservations()
         {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             var result = await _reservationService.GetReservationsByPassengerAsync(userId);
-            if (!result.Success)
-                return NotFound(result.Message);
 
             return Ok(result);
         }
 
+
         [HttpPost("confirm-after-payment/{id}")]
+        [Authorize(Roles = "Admin,Operator")]
         public async Task<IActionResult> ConfirmReservationAfterPayment(Guid id)
         {
             var result = await _reservationService.ConfirmReservationAfterPaymentAsync(id);

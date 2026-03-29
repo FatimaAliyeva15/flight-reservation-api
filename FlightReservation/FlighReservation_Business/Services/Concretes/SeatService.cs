@@ -8,6 +8,7 @@ using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using FlightReservation_Entities.Concretes;
 using FlightReservation_Entities.DTOs.AircraftDTOs;
 using FlightReservation_Entities.DTOs.SeatDTOs;
+using FlightReservation_Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -111,7 +112,7 @@ namespace FlighReservation_Business.Services.Concretes
         {
             var seats = await _unitOfWork.SeatRepository.GetAllAsync(s => s.FlightId == flightId);
             if (onlyAvailable)
-                seats = seats.Where(s => !s.IsBooked).ToList();
+                seats = seats.Where(s => s.Status == SeatStatus.Available).ToList();
 
             var dtos = _mapper.Map<List<SeatGetAllDto>>(seats);
             return new SuccessDataResult<List<SeatGetAllDto>>(dtos, "Seats retrieved for flight");
@@ -157,8 +158,8 @@ namespace FlighReservation_Business.Services.Concretes
             if (seat == null) 
                 throw new NotFoundException(ExceptionMessage.SeatNotFound);
 
+            seat.Status = SeatStatus.Available;
             seat.TicketId = null;
-            seat.IsBooked = false;
             seat.UpdatedAt = DateTime.UtcNow;
 
             await _unitOfWork.SeatRepository.Update(seat);
@@ -172,11 +173,10 @@ namespace FlighReservation_Business.Services.Concretes
             if (seat == null) 
                 throw new NotFoundException(ExceptionMessage.SeatNotFound);
 
-            if (seat.IsBooked)
-                return new ErrorResult("Seat already booked");
+            if (seat.Status != SeatStatus.Available)
+                return new ErrorResult("Seat already reserved or booked");
 
-            seat.TicketId = reservationId;
-            seat.IsBooked = true;
+            seat.Status = SeatStatus.Reserved;
             seat.UpdatedAt = DateTime.UtcNow;
 
             await _unitOfWork.SeatRepository.Update(seat);
@@ -208,11 +208,15 @@ namespace FlighReservation_Business.Services.Concretes
                 throw new NotFoundException(ExceptionMessage.SeatNotFound);
 
             existsSeat.SeatNumber = updateDTO.SeatNumber ?? existsSeat.SeatNumber;
-            existsSeat.Class = updateDTO.Class != null ? updateDTO.Class.Value : existsSeat.Class;
+            existsSeat.Class = updateDTO.Class ?? existsSeat.Class;
             existsSeat.FlightId = updateDTO.FlightId != Guid.Empty ? updateDTO.FlightId : existsSeat.FlightId;
 
-            if (updateDTO.IsBooked.HasValue)
-                existsSeat.IsBooked = updateDTO.IsBooked.Value;
+            if (updateDTO.Status.HasValue)
+                existsSeat.Status = updateDTO.Status.Value;
+
+            if (updateDTO.TicketId.HasValue)
+                existsSeat.TicketId = updateDTO.TicketId;
+
 
             existsSeat.UpdatedAt = DateTime.UtcNow;
 

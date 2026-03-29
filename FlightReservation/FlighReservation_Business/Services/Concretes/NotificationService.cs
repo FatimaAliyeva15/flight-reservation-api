@@ -45,13 +45,10 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<NotificationGetAllDto>>> GetAllDeletedNotificationsAsync()
         {
-            var notifications = await _unitOfWork.NotificationRepository
-            .GetDeletedAsync();
+            var notifications = await _unitOfWork.NotificationRepository.GetDeletedAsync("AppUser");
 
             if (notifications.Count == 0)
-                return new ErrorDataResult<List<NotificationGetAllDto>>(
-                    new List<NotificationGetAllDto>(),
-                    "Deleted notifications not found");
+                return new ErrorDataResult<List<NotificationGetAllDto>>(new List<NotificationGetAllDto>(),"Deleted notifications not found");
 
             var dtos = _mapper.Map<List<NotificationGetAllDto>>(notifications);
 
@@ -60,8 +57,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<NotificationGetAllDto>>> GetAllNotificationsAsync()
         {
-            var notifications = await _unitOfWork.NotificationRepository
-            .GetAllAsync(null, "User");
+            var notifications = await _unitOfWork.NotificationRepository.GetAllAsync(null, "AppUser");
 
             if (notifications.Count == 0)
                 return new ErrorDataResult<List<NotificationGetAllDto>>(
@@ -76,7 +72,7 @@ namespace FlighReservation_Business.Services.Concretes
         public async Task<IDataResult<List<NotificationGetAllDto>>> GetAllNotificationsPaginatedAsync(int page, int size)
         {
             var notifications = await _unitOfWork.NotificationRepository
-            .GetAllPaginatedAsync(page, size, null, "User");
+            .GetAllPaginatedAsync(page, size, null, "AppUser");
 
             if (notifications.Count == 0)
                 return new ErrorDataResult<List<NotificationGetAllDto>>(
@@ -90,7 +86,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<NotificationGetDto>> GetNotificationByIdAsync(Guid id)
         {
-            var notification = await _unitOfWork.NotificationRepository.GetAsync(n => n.Id == id, includeDeleted: false, "User");
+            var notification = await _unitOfWork.NotificationRepository.GetAsync(n => n.Id == id, includeDeleted: false, "AppUser");
 
             if (notification == null)
                 return new ErrorDataResult<NotificationGetDto>(null, "Notification not found");
@@ -115,9 +111,9 @@ namespace FlighReservation_Business.Services.Concretes
             var result = await _unitOfWork.SaveAsync();
 
             if (result == 0)
-                return new ErrorResult("Notification not hard deleted");
+                return new ErrorResult("Notification not deleted");
 
-            return new SuccessResult("Notification hard deleted");
+            return new SuccessResult("Notification permanently deleted");
         }
 
         public async Task<IResult> RecoverNotificationAsync(Guid id)
@@ -154,9 +150,9 @@ namespace FlighReservation_Business.Services.Concretes
             var result = await _unitOfWork.SaveAsync();
 
             if (result == 0)
-                return new ErrorResult("Notification not hard deleted");
+                return new ErrorResult("Notification not deleted");
 
-            return new SuccessResult("Notification hard deleted");
+            return new SuccessResult("Notification deleted");
 
         }
 

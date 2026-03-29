@@ -459,9 +459,6 @@ namespace FlightReservation_DataAccess.Migrations
                     b.Property<Guid>("FlightId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("IsBooked")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -469,6 +466,9 @@ namespace FlightReservation_DataAccess.Migrations
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("TicketId")
                         .HasColumnType("uniqueidentifier");

@@ -10,8 +10,8 @@ namespace FlightReservation_Entities.Concretes
     public class Seat: BaseEntity, IEntity
     {
         public string SeatNumber { get; set; } 
-        public SeatClass Class { get; set; } 
-        public bool IsBooked { get; set; } = false;
+        public SeatClass Class { get; set; }
+        public SeatStatus Status { get; set; } = SeatStatus.Available;
 
         public Guid FlightId { get; set; }
         public Flight Flight { get; set; }

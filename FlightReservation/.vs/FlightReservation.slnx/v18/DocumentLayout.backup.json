@@ -3,28 +3,36 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\services\\concretes\\authservice\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\services\\concretes\\authservice\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\services\\concretes\\flightservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\services\\concretes\\flightservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\services\\abstracts\\iauthservice\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\services\\abstracts\\iauthservice\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\services\\concretes\\reservationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\services\\concretes\\reservationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82FE0E63-5596-0FF0-97C8-8B70EAA3562F}|FlightReservation\\FlightReservation.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{82FE0E63-5596-0FF0-97C8-8B70EAA3562F}|FlightReservation\\FlightReservation.csproj|solutionrelative:flightreservation\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\services\\concretes\\ticketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\services\\concretes\\ticketservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\services\\concretes\\authservice\\smtpemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\services\\concretes\\authservice\\smtpemailsender.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_entities\\concretes\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|solutionrelative:flightreservation_entities\\concretes\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82FE0E63-5596-0FF0-97C8-8B70EAA3562F}|FlightReservation\\FlightReservation.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82FE0E63-5596-0FF0-97C8-8B70EAA3562F}|FlightReservation\\FlightReservation.csproj|solutionrelative:flightreservation\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_entities\\dtos\\reservationdtos\\reservationcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|solutionrelative:flightreservation_entities\\dtos\\reservationdtos\\reservationcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\utilities\\profilies\\authprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\utilities\\profilies\\authprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_entities\\dtos\\ticketdtos\\ticketcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|solutionrelative:flightreservation_entities\\dtos\\ticketdtos\\ticketcreatedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flightreservation_entities\\enums\\seatstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5CE80991-5DE3-B06A-BAA4-AF9F9AA5262E}|FlightReservation_Entities\\FlightReservation_Entities.csproj|solutionrelative:flightreservation_entities\\enums\\seatstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|c:\\users\\asus\\desktop\\airlinereservation\\flightreservation\\flighreservation_business\\services\\concretes\\seatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{82EE6E7A-1F40-0334-6685-C9620B29350D}|FlighReservation_Business\\FlighReservation_Business.csproj|solutionrelative:flighreservation_business\\services\\concretes\\seatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,12 +42,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{0ad07096-bba9-4900-a651-0598d26f6d24}"
@@ -49,81 +53,105 @@
               "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation\\appsettings.json",
-              "RelativeDocumentMoniker": "FlightReservation\\appsettings.json",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation\\appsettings.json",
-              "RelativeToolTip": "FlightReservation\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-05T19:27:47.071Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SmtpEmailSender.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\AuthService\\SmtpEmailSender.cs",
-              "RelativeDocumentMoniker": "FlighReservation_Business\\Services\\Concretes\\AuthService\\SmtpEmailSender.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\AuthService\\SmtpEmailSender.cs",
-              "RelativeToolTip": "FlighReservation_Business\\Services\\Concretes\\AuthService\\SmtpEmailSender.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAACgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T19:22:02.655Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\AuthService\\AuthService.cs",
-              "RelativeDocumentMoniker": "FlighReservation_Business\\Services\\Concretes\\AuthService\\AuthService.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\AuthService\\AuthService.cs",
-              "RelativeToolTip": "FlighReservation_Business\\Services\\Concretes\\AuthService\\AuthService.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAqwCoAAAAAAAAAAAAAAA==",
+              "Title": "FlightService.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\FlightService.cs",
+              "RelativeDocumentMoniker": "FlighReservation_Business\\Services\\Concretes\\FlightService.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\FlightService.cs",
+              "RelativeToolTip": "FlighReservation_Business\\Services\\Concretes\\FlightService.cs",
+              "ViewState": "AgIAACUAAAAAAAAAAAAiwDcAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T16:38:41.186Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IAuthService.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Abstracts\\IAuthService\\IAuthService.cs",
-              "RelativeDocumentMoniker": "FlighReservation_Business\\Services\\Abstracts\\IAuthService\\IAuthService.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Abstracts\\IAuthService\\IAuthService.cs",
-              "RelativeToolTip": "FlighReservation_Business\\Services\\Abstracts\\IAuthService\\IAuthService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T16:39:52.236Z",
+              "WhenOpened": "2026-03-29T13:03:49.711Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "FlightReservation\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "FlightReservation\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAowDsAAAAsAAAAAAAAAA==",
+              "Title": "ReservationCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationCreateDto.cs",
+              "RelativeDocumentMoniker": "FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationCreateDto.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationCreateDto.cs",
+              "RelativeToolTip": "FlightReservation_Entities\\DTOs\\ReservationDTOs\\ReservationCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T19:02:34.314Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-28T18:43:00.205Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "AuthProfile.cs",
-              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Utilities\\Profilies\\AuthProfile.cs",
-              "RelativeDocumentMoniker": "FlighReservation_Business\\Utilities\\Profilies\\AuthProfile.cs",
-              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Utilities\\Profilies\\AuthProfile.cs",
-              "RelativeToolTip": "FlighReservation_Business\\Utilities\\Profilies\\AuthProfile.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAKAAAAAAAAAA==",
+              "Title": "TicketCreateDto.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\DTOs\\TicketDTOs\\TicketCreateDto.cs",
+              "RelativeDocumentMoniker": "FlightReservation_Entities\\DTOs\\TicketDTOs\\TicketCreateDto.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\DTOs\\TicketDTOs\\TicketCreateDto.cs",
+              "RelativeToolTip": "FlightReservation_Entities\\DTOs\\TicketDTOs\\TicketCreateDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-05T19:16:44.582Z",
+              "WhenOpened": "2026-03-28T18:40:23.27Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SeatStatus.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\Enums\\SeatStatus.cs",
+              "RelativeDocumentMoniker": "FlightReservation_Entities\\Enums\\SeatStatus.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\Enums\\SeatStatus.cs",
+              "RelativeToolTip": "FlightReservation_Entities\\Enums\\SeatStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T18:24:15.855Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "SeatService.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\SeatService.cs",
+              "RelativeDocumentMoniker": "FlighReservation_Business\\Services\\Concretes\\SeatService.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\SeatService.cs",
+              "RelativeToolTip": "FlighReservation_Business\\Services\\Concretes\\SeatService.cs",
+              "ViewState": "AgIAAJkAAAAAAAAAAAAUwLMAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T11:54:04.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Reservation.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "RelativeDocumentMoniker": "FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "RelativeToolTip": "FlightReservation_Entities\\Concretes\\Reservation.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABoAAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T11:24:48.775Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TicketService.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\TicketService.cs",
+              "RelativeDocumentMoniker": "FlighReservation_Business\\Services\\Concretes\\TicketService.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\TicketService.cs",
+              "RelativeToolTip": "FlighReservation_Business\\Services\\Concretes\\TicketService.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAUwEoAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-27T18:38:24.935Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ReservationService.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\ReservationService.cs",
+              "RelativeDocumentMoniker": "FlighReservation_Business\\Services\\Concretes\\ReservationService.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\AirlineReservation\\FlightReservation\\FlighReservation_Business\\Services\\Concretes\\ReservationService.cs",
+              "RelativeToolTip": "FlighReservation_Business\\Services\\Concretes\\ReservationService.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAiwI0AAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-15T10:10:35.352Z",
               "EditorCaption": ""
             }
           ]

@@ -12,7 +12,6 @@ namespace FlightReservation_Entities.DTOs.NotificationDTOs
         public bool IsRead { get; set; }
         public DateTime SentAt { get; set; }
 
-        public Guid UserId { get; set; }
         public string UserName { get; set; }
     }
 }

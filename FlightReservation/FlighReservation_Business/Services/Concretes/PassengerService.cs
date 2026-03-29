@@ -164,6 +164,7 @@ namespace FlighReservation_Business.Services.Concretes
             existsPassenger.FirstName = updateDTO.FirstName ?? existsPassenger.FirstName;
             existsPassenger.LastName = updateDTO.LastName ?? existsPassenger.LastName;
             existsPassenger.PassportNumber = updateDTO.PassportNumber ?? existsPassenger.PassportNumber;
+            existsPassenger.DateOfBirth = updateDTO.DateOfBirth != default ? updateDTO.DateOfBirth : existsPassenger.DateOfBirth;
             existsPassenger.UpdatedAt = DateTime.UtcNow;
 
             await _unitOfWork.PassengerRepository.Update(existsPassenger);

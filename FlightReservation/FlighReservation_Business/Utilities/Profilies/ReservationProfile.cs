@@ -13,8 +13,12 @@ namespace FlighReservation_Business.Utilities.Profilies
         {
             CreateMap<ReservationCreateDto, Reservation>();
             CreateMap<ReservationUpdateDto, Reservation>();
-            CreateMap<Reservation, ReservationGetAllDto>();
-            CreateMap<Reservation, ReservationGetDto>();
+            CreateMap<Reservation, ReservationGetAllDto>()
+                .ForMember(dest => dest.AppUserName, opt => opt.MapFrom(src => src.AppUser.FullName))
+                .ForMember(dest => dest.FlightNumber, opt => opt.MapFrom(src => src.Flight.FlightNumber));
+            CreateMap<Reservation, ReservationGetDto>()
+                .ForMember(dest => dest.AppUserName, opt => opt.MapFrom(src => src.AppUser.FullName))
+                .ForMember(dest => dest.FlightNumber, opt => opt.MapFrom(src => src.Flight.FlightNumber));
         }
     }
 }

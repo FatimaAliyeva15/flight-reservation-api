@@ -13,7 +13,9 @@ namespace FlighReservation_Business.Utilities.Profilies
         {
             CreateMap<TicketCreateDto, Ticket>();
             CreateMap<TicketUpdateDto, Ticket>();
-            CreateMap<Ticket, TicketGetAllDto>();
+            CreateMap<Ticket, TicketGetAllDto>().ForMember(dest => dest.PassengerName,
+               opt => opt.MapFrom(src => src.Passenger.FirstName)).ForMember(dest => dest.SeatNumber,
+               opt => opt.MapFrom(src => src.Seat.SeatNumber)); ;
             CreateMap<Ticket, TicketGetDto>();
         }
     }

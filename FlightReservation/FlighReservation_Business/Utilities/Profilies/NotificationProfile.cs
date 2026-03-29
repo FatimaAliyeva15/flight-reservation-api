@@ -13,8 +13,8 @@ namespace FlighReservation_Business.Utilities.Profilies
         {
             CreateMap<NotificationCreateDto, Notification>();
             CreateMap<NotificationUpdateDto, Notification>();
-            CreateMap<Notification, NotificationGetAllDto>();
-            CreateMap<Notification, NotificationGetDto>();
+            CreateMap<Notification, NotificationGetAllDto>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.AppUser.UserName));
+            CreateMap<Notification, NotificationGetDto>().ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.AppUser.UserName));
         }
     }
 }

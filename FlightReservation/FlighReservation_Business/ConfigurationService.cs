@@ -3,12 +3,16 @@ using FlighReservation_Business.Services.Abstracts.IAuthService;
 using FlighReservation_Business.Services.Concretes;
 using FlighReservation_Business.Services.Concretes.AuthService;
 using FlighReservation_Business.Utilities.Profilies;
+using FlighReservation_Business.Validators.AircraftValidators;
 using FlightReservation_Core.Entities.Concrete.Auth;
+using FlightReservation_DataAccess.EFCore;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -24,9 +28,11 @@ namespace FlighReservation_Business
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             services.AddAutoMapper(typeof(AircraftProfile));
-            services.AddFluentValidationAutoValidation()
-                    .AddFluentValidationClientsideAdapters();
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            //services.AddFluentValidationAutoValidation()
+            //     .AddFluentValidationClientsideAdapters();
+            //services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
+            services.AddValidatorsFromAssemblyContaining<AircraftCreateDtoValidator>();
 
             services.AddScoped<IAircraftService, AircraftService>();
             services.AddScoped<IAirlineService, AirlineService>();
@@ -43,6 +49,8 @@ namespace FlighReservation_Business
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IEmailSender, SmtpEmailSender>();
+
+   
 
 
 

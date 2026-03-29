@@ -428,7 +428,7 @@
   {
     "ContainingType": "FlightReservation.Controllers.AuthController",
     "Method": "AddAdmin",
-    "RelativePath": "api/Auth/add-admin",
+    "RelativePath": "api/Auth/AddAdmin/add-admin",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -444,7 +444,7 @@
   {
     "ContainingType": "FlightReservation.Controllers.AuthController",
     "Method": "ConfirmEmail",
-    "RelativePath": "api/Auth/confirm-email",
+    "RelativePath": "api/Auth/ConfirmEmail/confirm-email",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -465,7 +465,7 @@
   {
     "ContainingType": "FlightReservation.Controllers.AuthController",
     "Method": "ForgotPassword",
-    "RelativePath": "api/Auth/forgot-password",
+    "RelativePath": "api/Auth/ForgotPassword/forgot-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -481,7 +481,7 @@
   {
     "ContainingType": "FlightReservation.Controllers.AuthController",
     "Method": "Login",
-    "RelativePath": "api/Auth/login",
+    "RelativePath": "api/Auth/Login/login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -497,7 +497,7 @@
   {
     "ContainingType": "FlightReservation.Controllers.AuthController",
     "Method": "Regiter",
-    "RelativePath": "api/Auth/register",
+    "RelativePath": "api/Auth/Regiter/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -513,7 +513,7 @@
   {
     "ContainingType": "FlightReservation.Controllers.AuthController",
     "Method": "ResetPassword",
-    "RelativePath": "api/Auth/reset-password",
+    "RelativePath": "api/Auth/ResetPassword/reset-password",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -1291,6 +1291,16 @@
   },
   {
     "ContainingType": "FlightReservation.Controllers.ReservationsController",
+    "Method": "GetMyReservations",
+    "RelativePath": "api/Reservations/GetMyReservations/my-reservations",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.ReservationsController",
     "Method": "GetPaginatedReservation",
     "RelativePath": "api/Reservations/GetPaginatedReservation/paginated",
     "HttpMethod": "GET",
@@ -1321,22 +1331,6 @@
       {
         "Name": "id",
         "Type": "System.Guid",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FlightReservation.Controllers.ReservationsController",
-    "Method": "GetReservationByPassenger",
-    "RelativePath": "api/Reservations/GetReservationByPassenger/by-passenger/{userId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.String",
         "IsRequired": true
       }
     ],

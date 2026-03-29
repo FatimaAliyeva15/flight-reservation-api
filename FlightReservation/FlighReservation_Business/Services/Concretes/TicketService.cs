@@ -4,10 +4,13 @@ using FlighReservation_Business.Utilities.Constants;
 using FlightReservation_Core.Business.Utilities.Exceptions;
 using FlightReservation_Core.Business.Utilities.Results.Abstract;
 using FlightReservation_Core.Business.Utilities.Results.Concrete;
+using FlightReservation_Core.Entities.Abstract;
 using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using FlightReservation_Entities.Concretes;
 using FlightReservation_Entities.DTOs.AircraftDTOs;
+using FlightReservation_Entities.DTOs.ReservationDTOs;
 using FlightReservation_Entities.DTOs.TicketDTOs;
+using FlightReservation_Entities.Enums;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System;
 using System.Collections.Generic;
@@ -29,7 +32,13 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> AddTicketAsync(TicketCreateDto createDto)
         {
-            var flight = await _unitOfWork.FlightRepository.GetAsync(f => f.Id == createDto.FlightId);
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == createDto.ReservationId);
+
+            if (reservation == null)
+                throw new NotFoundException(ExceptionMessage.ReservationNotFound);
+
+
+            var flight = await _unitOfWork.FlightRepository.GetAsync(f => f.Id == reservation.FlightId);
             if (flight == null)
                 throw new NotFoundException(ExceptionMessage.FlightNotFound);
 
@@ -37,14 +46,34 @@ namespace FlighReservation_Business.Services.Concretes
             if (passenger == null)
                 throw new NotFoundException(ExceptionMessage.PassengerNotFound);
 
-            var seat = await _unitOfWork.SeatRepository.GetAsync(s => s.Id == createDto.SeatId && !s.IsBooked);
-            if (seat == null)
-                return new ErrorResult("Seat is not available");
+            var seat = await _unitOfWork.SeatRepository.GetAsync(s => s.FlightId == reservation.FlightId && s.Status == SeatStatus.Reserved && s.TicketId == null);
 
-            var ticket = _mapper.Map<Ticket>(createDto);
-            ticket.CreatedAt = DateTime.UtcNow;
+            if (seat == null)
+                return new ErrorResult("No reserved seat available");
+
+            var ticket = new Ticket
+            {
+                ReservationId = reservation.Id,
+                PassengerId = createDto.PassengerId,
+                SeatId = seat.Id,
+                Price = flight.Price,
+                CreatedAt = DateTime.UtcNow
+
+            };
 
             await _unitOfWork.TicketRepository.AddAsync(ticket);
+
+
+            await _unitOfWork.SaveAsync();
+
+            seat.Status = SeatStatus.Booked;
+            seat.TicketId = ticket.Id;
+            seat.UpdatedAt = DateTime.UtcNow;
+            await _unitOfWork.SeatRepository.Update(seat);
+
+            reservation.Tickets ??= new List<Ticket>();
+            reservation.Tickets.Add(ticket);
+
             var result = await _unitOfWork.SaveAsync();
 
             if (result == 0)
@@ -61,11 +90,13 @@ namespace FlighReservation_Business.Services.Concretes
             if (ticket == null)
                 throw new NotFoundException(ExceptionMessage.TicketNotFound);
 
-            var seat = await _unitOfWork.SeatRepository.GetAsync(s => s.Id == seatId && !s.IsBooked);
+            var seat = await _unitOfWork.SeatRepository.GetAsync(s => s.Id == seatId && s.Status == SeatStatus.Available);
             if (seat == null)
                 return new ErrorResult("Seat not available");
 
-            seat.IsBooked = true;
+            seat.Status = SeatStatus.Reserved;
+            seat.UpdatedAt = DateTime.UtcNow;
+
             ticket.SeatId = seat.Id;
             ticket.UpdatedAt = DateTime.UtcNow;
 
@@ -85,7 +116,8 @@ namespace FlighReservation_Business.Services.Concretes
             var seat = await _unitOfWork.SeatRepository.GetAsync(s => s.Id == ticket.SeatId);
             if (seat != null)
             {
-                seat.IsBooked = false;
+                seat.Status = SeatStatus.Available; 
+                seat.UpdatedAt = DateTime.UtcNow;
                 await _unitOfWork.SeatRepository.Update(seat);
             }
 
@@ -110,7 +142,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<TicketGetAllDto>>> GetAllTicketsAsync()
         {
-            var tickets = await _unitOfWork.TicketRepository.GetAllAsync();
+            var tickets = await _unitOfWork.TicketRepository.GetAllAsync(null, "Flight", "Passenger", "Reservation","Seat");
             if (tickets.Count == 0)
                 return new ErrorDataResult<List<TicketGetAllDto>>(new List<TicketGetAllDto>(), "Ticket not founded");
 
