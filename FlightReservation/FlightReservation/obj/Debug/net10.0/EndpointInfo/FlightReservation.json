@@ -3354,15 +3354,7 @@
       "TicketCreateDto": {
         "type": "object",
         "properties": {
-          "flightId": {
-            "type": "string",
-            "format": "uuid"
-          },
           "passengerId": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "seatId": {
             "type": "string",
             "format": "uuid"
           },

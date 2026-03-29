@@ -32,7 +32,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> AddTicketAsync(TicketCreateDto createDto)
         {
-            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == createDto.ReservationId);
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == createDto.ReservationId, includeDeleted: false, "Tickets");
 
             if (reservation == null)
                 throw new NotFoundException(ExceptionMessage.ReservationNotFound);
@@ -55,6 +55,7 @@ namespace FlighReservation_Business.Services.Concretes
             {
                 ReservationId = reservation.Id,
                 PassengerId = createDto.PassengerId,
+                FlightId = reservation.FlightId,
                 SeatId = seat.Id,
                 Price = flight.Price,
                 CreatedAt = DateTime.UtcNow
@@ -64,8 +65,6 @@ namespace FlighReservation_Business.Services.Concretes
             await _unitOfWork.TicketRepository.AddAsync(ticket);
 
 
-            await _unitOfWork.SaveAsync();
-
             seat.Status = SeatStatus.Booked;
             seat.TicketId = ticket.Id;
             seat.UpdatedAt = DateTime.UtcNow;
@@ -73,6 +72,8 @@ namespace FlighReservation_Business.Services.Concretes
 
             reservation.Tickets ??= new List<Ticket>();
             reservation.Tickets.Add(ticket);
+            reservation.TotalPrice += ticket.Price;
+
 
             var result = await _unitOfWork.SaveAsync();
 

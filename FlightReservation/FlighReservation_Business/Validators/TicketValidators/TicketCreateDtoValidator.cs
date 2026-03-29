@@ -10,9 +10,7 @@ namespace FlighReservation_Business.Validators.TicketValidators
     {
         public TicketCreateDtoValidator()
         {
-            RuleFor(x => x.FlightId).NotEmpty().WithMessage("FlightId is required.");
             RuleFor(x => x.PassengerId).NotEmpty().WithMessage("PassengerId is required.");
-            RuleFor(x => x.SeatId).NotEmpty().WithMessage("SeatId is required.");
             RuleFor(x => x.ReservationId).NotEmpty().WithMessage("ReservationId is required.");
         }
     }

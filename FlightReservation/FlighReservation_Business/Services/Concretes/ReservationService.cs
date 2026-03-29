@@ -42,6 +42,8 @@ namespace FlighReservation_Business.Services.Concretes
             foreach (var seat in seats)
             {
                 seat.Status = SeatStatus.Reserved;
+                seat.UpdatedAt = DateTime.UtcNow;
+                await _unitOfWork.SeatRepository.Update(seat);
             }
 
             var reservation = new Reservation
@@ -151,10 +153,11 @@ namespace FlighReservation_Business.Services.Concretes
             }
 
             var result = await _unitOfWork.SaveAsync();
-            return result > 0 ? new SuccessResult("Reservation with tickets created") : new ErrorResult("Creation failed");
+            return result > 0 
+                ? new SuccessResult("Reservation with tickets created") 
+                : new ErrorResult("Creation failed");
 
         }
-
         public async Task<IDataResult<List<ReservationGetAllDto>>> GetAllDeletedReservationsAsync()
         {
             var deletedReservations = await _unitOfWork.ReservationRepository.GetDeletedAsync();
@@ -168,11 +171,23 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<ReservationGetAllDto>>> GetAllReservationsAsync()
         {
-            var reservations = await _unitOfWork.ReservationRepository.GetAllAsync(null, "Flight", "Tickets", "AppUser");
+            var reservations = await _unitOfWork.ReservationRepository.GetAllAsync(
+                null, "Flight", "Tickets", "AppUser");
+
             if (reservations.Count == 0)
                 return new ErrorDataResult<List<ReservationGetAllDto>>(new List<ReservationGetAllDto>(), "No reservations found");
 
-            var dtos = _mapper.Map<List<ReservationGetAllDto>>(reservations);
+            var dtos = reservations.Select(r => new ReservationGetAllDto
+            {
+                Id = r.Id,
+                TotalPrice = r.TotalPrice,
+                Status = r.Status,
+                IsPaid = r.IsPaid,
+                AppUserName = r.AppUser?.FullName,
+                FlightNumber = r.Flight?.FlightNumber,
+                TicketCount = r.Tickets?.Count ?? 0
+            }).ToList();
+
             return new SuccessDataResult<List<ReservationGetAllDto>>(dtos, "Reservations retrieved successfully");
         }
 
@@ -185,17 +200,50 @@ namespace FlighReservation_Business.Services.Concretes
             if (reservations.Count == 0)
                 return new ErrorDataResult<List<ReservationGetAllDto>>(new List<ReservationGetAllDto>(), "No reservations found");
 
-            var dtos = _mapper.Map<List<ReservationGetAllDto>>(reservations);
+            var dtos = reservations.Select(r => new ReservationGetAllDto
+            {
+                Id = r.Id,
+                TotalPrice = r.TotalPrice,
+                Status = r.Status,
+                IsPaid = r.IsPaid,
+                AppUserName = r.AppUser?.FullName,
+                FlightNumber = r.Flight?.FlightNumber,
+                TicketCount = r.Tickets?.Count ?? 0
+            }).ToList();
             return new SuccessDataResult<List<ReservationGetAllDto>>(dtos, "Reservations retrieved with pagination");
         }
 
         public async Task<IDataResult<ReservationGetDto>> GetReservationByIdAsync(Guid id)
         {
-            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == id, includeDeleted: false, "Flight", "Tickets", "AppUser");
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == id, includeDeleted: false, "Flight", "Tickets.Seat", "Tickets.Passenger", "AppUser");
             if (reservation == null)
                 return new ErrorDataResult<ReservationGetDto>("Reservation not found");
 
-            var dto = _mapper.Map<ReservationGetDto>(reservation);
+            var dto = new ReservationGetDto
+            {
+                TotalPrice = reservation.TotalPrice,
+                Status = reservation.Status,
+                IsPaid = reservation.IsPaid,
+                PaidAt = reservation.PaidAt,
+                CancelledAt = reservation.CancelledAt,
+                RefundedAt = reservation.RefundedAt,
+                ExpiresAt = reservation.ExpiresAt,
+                FlightId = reservation.FlightId,
+                FlightNumber = reservation.Flight.FlightNumber,
+                AppUserId = reservation.AppUserId,
+                AppUserName = reservation.AppUser.FullName,
+                Tickets = reservation.Tickets.Select(t => new TicketGetDto
+                {
+                    Price = t.Price,
+                    FlightId = t.FlightId,
+                    FlightNumber = t.Flight.FlightNumber,
+                    PassengerId = t.PassengerId,
+                    PassengerName = t.Passenger.FirstName + t.Passenger.LastName,
+                    SeatId = t.SeatId,
+                    SeatNumber = t.Seat.SeatNumber,
+                    ReservationId = t.ReservationId
+                }).ToList()
+            };
             return new SuccessDataResult<ReservationGetDto>(dto, "Reservation retrieved successfully");
 
         }
