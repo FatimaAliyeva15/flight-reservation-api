@@ -17,5 +17,6 @@ namespace FlighReservation_Business.Services.Abstracts
         Task<IResult> HardDeletePassengerAsync(Guid id);
         Task<IResult> SoftDeletePassengerAsync(Guid id);
         Task<IResult> RecoverPassengerAsync(Guid id);
+        
     }
 }

@@ -10,6 +10,7 @@ namespace FlightReservation.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class PaymentsController : ControllerBase
     {
         private readonly IPaymentService _paymentService;
@@ -21,7 +22,7 @@ namespace FlightReservation.Controllers
 
 
         [HttpGet]
-        //[Authorize(Roles = "Admin,Operator")]
+        [Authorize(Roles = "Admin,Operator")]
         public async Task<IActionResult> GetAllPayments()
         {
             var result = await _paymentService.GetAllPaymentsAsync();
@@ -32,7 +33,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("{id}")]
-        //[Authorize(Roles = "Admin,Operator")]
+        [Authorize(Roles = "Admin,Operator")]
         public async Task<IActionResult> GetPaymentById(Guid id)
         {
             var result = await _paymentService.GetPaymentByIdAsync(id);
@@ -44,6 +45,7 @@ namespace FlightReservation.Controllers
 
 
         [HttpGet("reservation/{reservationId}")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> GetPaymentsByReservation(Guid reservationId)
         {
             var result = await _paymentService.GetPaymentsByReservationAsync(reservationId);
@@ -54,6 +56,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("deleted")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllDeletedPayments()
         {
             var result = await _paymentService.GetAllDeletedPaymentsAsync();
@@ -64,6 +67,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("paginated")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> GetAllPaymentsPaginated([FromQuery] int page, [FromQuery] int size)
         {
             var result = await _paymentService.GetAllPaymentsPaginatedAsync(page, size);
@@ -76,9 +80,10 @@ namespace FlightReservation.Controllers
 
 
         [HttpGet("passenger")]
+        [Authorize(Roles = "Admin, Operator, Customer")]
         public async Task<IActionResult> GetPaymentsByCurrentUser()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var result = await _paymentService.GetPaymentsByPassengerAsync(userId);
             if (!result.Success)
                 return NotFound(result.Message);
@@ -87,6 +92,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Operator, Customer")]
         public async Task<IActionResult> CreatePayment([FromBody] PaymentCreateDto createDto)
         {
             var result = await _paymentService.AddPaymentAsync(createDto);
@@ -98,7 +104,7 @@ namespace FlightReservation.Controllers
 
 
         [HttpPut("{id}")]
-        //[Authorize(Roles = "Admin,Operator")]
+        [Authorize(Roles = "Admin,Operator")]
         public async Task<IActionResult> UpdatePayment(Guid id, [FromBody] PaymentUpdateDto updateDto)
         {
             var result = await _paymentService.UpdatePaymentAsync(id, updateDto);
@@ -110,6 +116,7 @@ namespace FlightReservation.Controllers
 
 
         [HttpPatch("confirm/{id}")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> ConfirmPayment(Guid id)
         {
             var result = await _paymentService.ConfirmPaymentAsync(id);
@@ -121,6 +128,7 @@ namespace FlightReservation.Controllers
 
         
         [HttpPatch("refund/{id}")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> RefundPayment(Guid id)
         {
             var result = await _paymentService.RefundPaymentAsync(id);
@@ -132,7 +140,7 @@ namespace FlightReservation.Controllers
 
 
         [HttpDelete("{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SoftDeletePayment(Guid id)
         {
             var result = await _paymentService.SoftDeletePaymentAsync(id);
@@ -144,7 +152,7 @@ namespace FlightReservation.Controllers
 
 
         [HttpDelete("hard/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> HardDeletePayment(Guid id)
         {
             var result = await _paymentService.HardDeletePaymentAsync(id);
@@ -155,7 +163,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPatch("recover/{id}")]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RecoverPayment(Guid id)
         {
             var result = await _paymentService.RecoverPaymentAsync(id);

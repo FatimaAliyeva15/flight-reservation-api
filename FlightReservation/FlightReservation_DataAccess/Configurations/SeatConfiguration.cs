@@ -15,6 +15,7 @@ namespace FlightReservation_DataAccess.Configurations
             builder.Property(x => x.Class).IsRequired().HasMaxLength(20);
             builder.HasOne(x => x.Flight).WithMany(x => x.Seats).HasForeignKey(x => x.FlightId).OnDelete(DeleteBehavior.Cascade);
             builder.HasOne(x => x.Ticket).WithOne(x => x.Seat).HasForeignKey<Seat>(x => x.TicketId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(s => s.Ticket).WithOne(t => t.Seat).HasForeignKey<Ticket>(t => t.SeatId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

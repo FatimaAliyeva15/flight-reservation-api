@@ -12,7 +12,7 @@ namespace FlighReservation_Business.Validators.NotificationValidators
         {
             RuleFor(x => x.Title).NotEmpty().WithMessage("Title is required").MaximumLength(100).WithMessage("Title size can be maximum 100");
             RuleFor(x => x.Message).NotEmpty().WithMessage("Message is required").MaximumLength(100).WithMessage("Message size can be maximum 100");
-            RuleFor(x => x.AppUserId).NotEmpty().WithMessage("UserId can not be empty");
+           // RuleFor(x => x.AppUserId).NotEmpty().WithMessage("UserId can not be empty");
         }
     }
 }

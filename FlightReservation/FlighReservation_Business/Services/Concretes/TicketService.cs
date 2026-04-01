@@ -9,6 +9,7 @@ using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using FlightReservation_Entities.Concretes;
 using FlightReservation_Entities.DTOs.AircraftDTOs;
 using FlightReservation_Entities.DTOs.ReservationDTOs;
+using FlightReservation_Entities.DTOs.SeatDTOs;
 using FlightReservation_Entities.DTOs.TicketDTOs;
 using FlightReservation_Entities.Enums;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -172,9 +173,15 @@ namespace FlighReservation_Business.Services.Concretes
                 "Tickets listed with pagination");
         }
 
-        public Task<IDataResult<TicketGetDto>> GetTicketByIdAsync(Guid id)
+        public async Task<IDataResult<TicketGetDto>> GetTicketByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existsTicket = await _unitOfWork.TicketRepository.GetAsync(a => a.Id == id, includeDeleted: false, "Flight", "Passenger", "Reservation", "Seat");
+            if (existsTicket == null)
+                return new ErrorDataResult<TicketGetDto>(_mapper.Map<TicketGetDto>(existsTicket), "Ticket not founded");
+
+            var dto = _mapper.Map<TicketGetDto>(existsTicket);
+
+            return new SuccessDataResult<TicketGetDto>(dto, "Ticket founded");
         }
 
         public async Task<IDataResult<List<TicketGetAllDto>>> GetTicketsByPassengerAsync(Guid passengerId)
@@ -244,20 +251,65 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> UpdateTicketAsync(Guid id, TicketUpdateDto updateDto)
         {
-            var ticket = await _unitOfWork.TicketRepository.GetAsync(a => a.Id == id);
+            var ticket = await _unitOfWork.TicketRepository.GetAsync(t => t.Id == id);
             if (ticket == null)
                 throw new NotFoundException(ExceptionMessage.TicketNotFound);
 
-            ticket.SeatId = updateDto.SeatId != Guid.Empty ? updateDto.SeatId : ticket.SeatId;
-            ticket.UpdatedAt = DateTime.UtcNow;
+            // Seat başqa ticket-də istifadə olunub?
+            var seatUsed = await _unitOfWork.TicketRepository
+                .GetAsync(t => t.SeatId == updateDto.SeatId && t.Id != id);
 
+            if (seatUsed != null)
+                return new ErrorResult("Seat already used by another ticket");
+
+            var newSeat = await _unitOfWork.SeatRepository.GetAsync(s => s.Id == updateDto.SeatId);
+            if (newSeat == null)
+                return new ErrorResult("Seat not found");
+
+            if (newSeat.Status != SeatStatus.Available)
+                return new ErrorResult("Seat is not available");
+
+            // Köhnə seat
+            var oldSeat = await _unitOfWork.SeatRepository.GetAsync(s => s.Id == ticket.SeatId);
+            if (oldSeat != null)
+            {
+                oldSeat.Status = SeatStatus.Available;
+                oldSeat.TicketId = null;
+                await _unitOfWork.SeatRepository.Update(oldSeat);
+            }
+
+            // Yeni seat
+            newSeat.Status = SeatStatus.Booked;
+            newSeat.TicketId = ticket.Id;
+            await _unitOfWork.SeatRepository.Update(newSeat);
+
+            // Ticket
+            ticket.SeatId = newSeat.Id;
             await _unitOfWork.TicketRepository.Update(ticket);
+
             var result = await _unitOfWork.SaveAsync();
 
-            if (result == 0)
-                return new ErrorResult("Ticket not updated");
-
-            return new SuccessResult("Ticket updated");
+            return result > 0
+                ? new SuccessResult("Ticket updated")
+                : new ErrorResult("Ticket not updated");
         }
+        //public async Task<IResult> UpdateTicketAsync(Guid id, TicketUpdateDto updateDto)
+        //{
+        //    var ticket = await _unitOfWork.TicketRepository.GetAsync(a => a.Id == id);
+        //    if (ticket == null)
+        //        throw new NotFoundException(ExceptionMessage.TicketNotFound);
+
+        //    ticket.SeatId = updateDto.SeatId != Guid.Empty ? updateDto.SeatId : ticket.SeatId;
+        //    ticket.UpdatedAt = DateTime.UtcNow;
+
+        //    await _unitOfWork.TicketRepository.Update(ticket);
+        //    var result = await _unitOfWork.SaveAsync();
+
+        //    if (result == 0)
+        //        return new ErrorResult("Ticket not updated");
+
+        //    return new SuccessResult("Ticket updated");
+        //}
+
     }
 }

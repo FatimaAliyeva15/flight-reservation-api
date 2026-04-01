@@ -79,7 +79,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin, Operator")]
+        [Authorize(Roles = "Admin, Operator, Customer")]
         public async Task<IActionResult> GetAllAircrafts()
         {
             var result = await _aircraftService.GetAllAircraftsAsync();

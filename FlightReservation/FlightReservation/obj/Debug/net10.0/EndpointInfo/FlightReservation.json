@@ -1335,6 +1335,18 @@
         }
       }
     },
+    "/api/Notifications/GetMyNotifications/my-notifications": {
+      "get": {
+        "tags": [
+          "Notifications"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
     "/api/Notifications/GetAllNotificationsPaginated/paginated": {
       "get": {
         "tags": [
@@ -2186,7 +2198,7 @@
       }
     },
     "/api/Reservations/ConfirmReservationAfterPayment/confirm-after-payment/{id}": {
-      "post": {
+      "patch": {
         "tags": [
           "Reservations"
         ],
@@ -2414,36 +2426,6 @@
             "name": "id",
             "in": "path",
             "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/api/Seats/ReserveSeat/reserve": {
-      "patch": {
-        "tags": [
-          "Seats"
-        ],
-        "parameters": [
-          {
-            "name": "seatId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "reservationId",
-            "in": "query",
             "schema": {
               "type": "string",
               "format": "uuid"
@@ -2760,36 +2742,6 @@
         }
       }
     },
-    "/api/Tickets/AssignSeatToTicket/assign-seat": {
-      "patch": {
-        "tags": [
-          "Tickets"
-        ],
-        "parameters": [
-          {
-            "name": "ticketId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          },
-          {
-            "name": "seatId",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
     "/api/Tickets/CancelTicket/cancel/{ticketId}": {
       "patch": {
         "tags": [
@@ -2828,6 +2780,18 @@
               "format": "uuid"
             }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/Tickets/GetTicketsByCurrentUser/by-passenger": {
+      "get": {
+        "tags": [
+          "Tickets"
         ],
         "responses": {
           "200": {
@@ -3087,10 +3051,6 @@
           "message": {
             "type": "string",
             "nullable": true
-          },
-          "appUserId": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3167,6 +3127,22 @@
           "reservationId": {
             "type": "string",
             "format": "uuid"
+          },
+          "cardNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "cardHolderName": {
+            "type": "string",
+            "nullable": true
+          },
+          "expireDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "cvv": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -3233,6 +3209,16 @@
         },
         "additionalProperties": false
       },
+      "ReservationCreateWithTicketDto": {
+        "type": "object",
+        "properties": {
+          "passengerId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
       "ReservationStatus": {
         "enum": [
           "PendingPayment",
@@ -3268,7 +3254,7 @@
           "tickets": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/TicketCreateDto"
+              "$ref": "#/components/schemas/ReservationCreateWithTicketDto"
             },
             "nullable": true
           }

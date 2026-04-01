@@ -9,5 +9,10 @@ namespace FlightReservation_Entities.DTOs.PaymentDTOs
     {
         public decimal Amount { get; set; }
         public Guid ReservationId { get; set; }
+        public string CardNumber { get; set; }
+        public string CardHolderName { get; set; }
+        public string ExpireDate { get; set; }
+        public string CVV { get; set; }
+
     }
 }

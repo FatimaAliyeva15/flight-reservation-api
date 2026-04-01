@@ -67,9 +67,24 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> CancelReservationAsync(Guid reservationId)
         {
-            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == reservationId);
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == reservationId, false, "Tickets");
+
             if (reservation == null)
-                throw new NotFoundException("Reservation not found");
+                throw new NotFoundException(ExceptionMessage.ReservationNotFound);
+
+            if (reservation.Tickets == null || reservation.Tickets.Count == 0)
+            {
+                reservation.Status = ReservationStatus.Cancelled;
+                reservation.CancelledAt = DateTime.UtcNow;
+                reservation.UpdatedAt = DateTime.UtcNow;
+
+                await _unitOfWork.ReservationRepository.Update(reservation);
+                var resultOnlyReservation = await _unitOfWork.SaveAsync();
+
+                return resultOnlyReservation > 0
+                    ? new SuccessResult("Reservation cancelled (no tickets)")
+                    : new ErrorResult("Cancellation failed");
+            }
 
             foreach (var ticket in reservation.Tickets)
             {
@@ -83,8 +98,8 @@ namespace FlighReservation_Business.Services.Concretes
                 ticket.IsDeleted = true;
                 ticket.UpdatedAt = DateTime.UtcNow;
                 await _unitOfWork.TicketRepository.Update(ticket);
-
             }
+
             reservation.Status = ReservationStatus.Cancelled;
             reservation.CancelledAt = DateTime.UtcNow;
             reservation.UpdatedAt = DateTime.UtcNow;
@@ -93,12 +108,11 @@ namespace FlighReservation_Business.Services.Concretes
             var result = await _unitOfWork.SaveAsync();
 
             return result > 0 ? new SuccessResult("Reservation cancelled") : new ErrorResult("Cancellation failed");
-
         }
 
         public async Task<IResult> ConfirmReservationAfterPaymentAsync(Guid reservationId)
         {
-            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == reservationId);
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == reservationId, false, "Tickets");
             if (reservation == null)
                 throw new NotFoundException(ExceptionMessage.ReservationNotFound);
 
@@ -114,29 +128,37 @@ namespace FlighReservation_Business.Services.Concretes
 
         }
 
-        public async Task<IResult> CreateReservationWithTicketsAsync(ReservationCreateDto createDto, List<TicketCreateDto> ticketsDto)
+        public async Task<IResult> CreateReservationWithTicketsAsync(ReservationCreateDto createDto, List<ReservationCreateWithTicketDto> ticketsDto, string userId)
         {
+            var flight = await _unitOfWork.FlightRepository.GetAsync(f => f.Id == createDto.FlightId);
+
+            if (flight == null)
+                throw new NotFoundException(ExceptionMessage.FlightNotFound);
+
+
             var reservation = new Reservation
             {
                 FlightId = createDto.FlightId,
+                AppUserId = userId,
                 CreatedAt = DateTime.UtcNow,
                 Status = ReservationStatus.PendingPayment,
+                TotalPrice = 0,
                 Tickets = new List<Ticket>()
             };
 
             await _unitOfWork.ReservationRepository.AddAsync(reservation);
+            await _unitOfWork.SaveAsync();
 
-            foreach (var ticketDto in ticketsDto)
+            for (int i = 0; i < createDto.SeatIds.Count; i++)
             {
-                var seat = await _unitOfWork.SeatRepository.GetAsync(s => createDto.SeatIds.Contains(s.Id) && s.Status == SeatStatus.Available);
+                var seatId = createDto.SeatIds[i];
+                var ticketDto = ticketsDto[i];
+
+                var seat = await _unitOfWork.SeatRepository
+                    .GetAsync(s => s.Id == seatId && s.Status == SeatStatus.Available);
 
                 if (seat == null)
-                    return new ErrorResult("One or more seats are not available");
-
-                seat.Status = SeatStatus.Reserved;
-                seat.UpdatedAt = DateTime.UtcNow;
-                await _unitOfWork.SeatRepository.Update(seat);
-
+                    return new ErrorResult($"Seat {seatId} is not available");
 
                 var ticket = new Ticket
                 {
@@ -144,12 +166,21 @@ namespace FlighReservation_Business.Services.Concretes
                     FlightId = reservation.FlightId,
                     SeatId = seat.Id,
                     Reservation = reservation,
-                    Price = 0,
+                    Price = flight.Price,
                     CreatedAt = DateTime.UtcNow
                 };
 
-                reservation.Tickets.Add(ticket);
                 await _unitOfWork.TicketRepository.AddAsync(ticket);
+                await _unitOfWork.SaveAsync();
+
+                seat.Status = SeatStatus.Booked;
+                seat.TicketId = ticket.Id;
+                seat.UpdatedAt = DateTime.UtcNow;
+                await _unitOfWork.SeatRepository.Update(seat);
+
+                reservation.Tickets.Add(ticket);
+                reservation.TotalPrice += flight.Price;
+
             }
 
             var result = await _unitOfWork.SaveAsync();
@@ -158,9 +189,11 @@ namespace FlighReservation_Business.Services.Concretes
                 : new ErrorResult("Creation failed");
 
         }
+
+
         public async Task<IDataResult<List<ReservationGetAllDto>>> GetAllDeletedReservationsAsync()
         {
-            var deletedReservations = await _unitOfWork.ReservationRepository.GetDeletedAsync();
+            var deletedReservations = await _unitOfWork.ReservationRepository.GetDeletedAsync("Flight", "Tickets", "AppUser");
             if (deletedReservations.Count == 0)
                 return new ErrorDataResult<List<ReservationGetAllDto>>(new List<ReservationGetAllDto>(), "Deleted reservations not found");
 
@@ -171,8 +204,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<ReservationGetAllDto>>> GetAllReservationsAsync()
         {
-            var reservations = await _unitOfWork.ReservationRepository.GetAllAsync(
-                null, "Flight", "Tickets", "AppUser");
+            var reservations = await _unitOfWork.ReservationRepository.GetAllAsync(null, "Flight", "Tickets", "AppUser");
 
             if (reservations.Count == 0)
                 return new ErrorDataResult<List<ReservationGetAllDto>>(new List<ReservationGetAllDto>(), "No reservations found");
@@ -251,39 +283,49 @@ namespace FlighReservation_Business.Services.Concretes
         public async Task<IDataResult<List<ReservationGetAllDto>>> GetReservationsByPassengerAsync(string userId)
         {
             var reservations = await _unitOfWork.ReservationRepository.GetAllAsync(r => r.AppUserId == userId, "Flight", "Tickets", "AppUser");
+
             if (reservations.Count == 0)
                 return new ErrorDataResult<List<ReservationGetAllDto>>(new List<ReservationGetAllDto>(), "No reservations found for passenger");
 
-            var dtos = _mapper.Map<List<ReservationGetAllDto>>(reservations);
-            return new SuccessDataResult<List<ReservationGetAllDto>>(dtos, "Passenger reservations retrieved");
+            var dtos = reservations.Select(r => new ReservationGetAllDto
+            {
+                Id = r.Id,
+                TotalPrice = r.TotalPrice,
+                Status = r.Status,
+                IsPaid = r.IsPaid,
+                AppUserName = r.AppUser?.FullName,
+                FlightNumber = r.Flight?.FlightNumber,
+                TicketCount = r.Tickets?.Count ?? 0
+            }).ToList();
 
+            return new SuccessDataResult<List<ReservationGetAllDto>>(dtos, "Passenger reservations retrieved");
         }
 
-    //    public async Task<IDataResult<ReservationWithTicketsDto>> GetReservationWithTicketsAsync(Guid reservationId)
-    //    {
-    //        var reservation = await _unitOfWork.ReservationRepository.GetAsync(
-    //    r => r.Id == reservationId,
-    //    includeDeleted: false,
-    //    "Tickets.Passenger",
-    //    "Tickets.Seat",
-    //    "Flight"
-    //);
+        //    public async Task<IDataResult<ReservationWithTicketsDto>> GetReservationWithTicketsAsync(Guid reservationId)
+        //    {
+        //        var reservation = await _unitOfWork.ReservationRepository.GetAsync(
+        //    r => r.Id == reservationId,
+        //    includeDeleted: false,
+        //    "Tickets.Passenger",
+        //    "Tickets.Seat",
+        //    "Flight"
+        //);
 
-    //        if (reservation == null)
-    //            return new ErrorDataResult<ReservationWithTicketsDto>("Reservation not found");
+        //        if (reservation == null)
+        //            return new ErrorDataResult<ReservationWithTicketsDto>("Reservation not found");
 
-    //        var dto = new ReservationWithTicketsDto
-    //        {
-    //            ReservationId = reservation.Id,
-    //            FlightId = reservation.FlightId,
-    //            AppUserId = reservation.AppUserId,
-    //            TotalPrice = reservation.TotalPrice,
-    //            Status = reservation.Status,
-    //            Tickets = _mapper.Map<List<TicketGetDto>>(reservation.Tickets)
-    //        };
+        //        var dto = new ReservationWithTicketsDto
+        //        {
+        //            ReservationId = reservation.Id,
+        //            FlightId = reservation.FlightId,
+        //            AppUserId = reservation.AppUserId,
+        //            TotalPrice = reservation.TotalPrice,
+        //            Status = reservation.Status,
+        //            Tickets = _mapper.Map<List<TicketGetDto>>(reservation.Tickets)
+        //        };
 
-    //        return new SuccessDataResult<ReservationWithTicketsDto>(dto, "Reservation with tickets retrieved");
-    //    }
+        //        return new SuccessDataResult<ReservationWithTicketsDto>(dto, "Reservation with tickets retrieved");
+        //    }
 
         public async Task<IResult> HardDeleteReservationAsync(Guid id)
         {

@@ -1,12 +1,16 @@
 ﻿using FlighReservation_Business.Services.Abstracts;
+using FlighReservation_Business.Services.Concretes;
 using FlightReservation_Entities.DTOs.NotificationDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace FlightReservation.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class NotificationsController : ControllerBase
     {
         private readonly INotificationService _notificationService;
@@ -17,9 +21,12 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Operator, Customer")]
         public async Task<IActionResult> AddNotification([FromBody] NotificationCreateDto createDto)
         {
-            var result = await _notificationService.AddNotificationAsync(createDto);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var result = await _notificationService.AddNotificationAsync(createDto, userId);
             if (!result.Success)
 
 
@@ -28,6 +35,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> UpdateNotification(Guid id, [FromBody] NotificationUpdateDto updateDto)
         {
             var result = await _notificationService.UpdateNotificationAsync(id, updateDto);
@@ -37,6 +45,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpDelete("soft/{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SoftDeleteNotification(Guid id)
         {
             var result = await _notificationService.SoftDeleteNotificationAsync(id);
@@ -46,6 +55,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpDelete("hard/{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> HardDeleteNotification(Guid id)
         {
             var result = await _notificationService.HardDeleteNotificationAsync(id);
@@ -55,6 +65,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPatch("recover/{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RecoverNotification(Guid id)
         {
             var result = await _notificationService.RecoverNotificationAsync(id);
@@ -64,6 +75,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> GetNotificationById(Guid id)
         {
             var result = await _notificationService.GetNotificationByIdAsync(id);
@@ -73,6 +85,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> GetAllNotifications()
         {
             var result = await _notificationService.GetAllNotificationsAsync();
@@ -81,7 +94,19 @@ namespace FlightReservation.Controllers
             return Ok(result.Data);
         }
 
+        [HttpGet("my-notifications")]
+        [Authorize(Roles = "Customer")]
+        public async Task<IActionResult> GetMyNotifications()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var result = await _notificationService.GetNotificationsByPassengerAsync(userId);
+
+            return Ok(result);
+        }
+
         [HttpGet("paginated")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> GetAllNotificationsPaginated([FromQuery] int page = 1, [FromQuery] int size = 10)
         {
             var result = await _notificationService.GetAllNotificationsPaginatedAsync(page, size);
@@ -91,6 +116,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("deleted")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllDeletedNotifications()
         {
             var result = await _notificationService.GetAllDeletedNotificationsAsync();

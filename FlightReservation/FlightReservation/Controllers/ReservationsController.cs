@@ -131,7 +131,9 @@ namespace FlightReservation.Controllers
         [Authorize(Roles = "Customer")]
         public async Task<IActionResult> CreateReservationWithTickets([FromBody] ReservationWithTicketsDto dto)
         {
-            var result = await _reservationService.CreateReservationWithTicketsAsync(dto.Reservation, dto.Tickets);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var result = await _reservationService.CreateReservationWithTicketsAsync(dto.Reservation, dto.Tickets, userId);
             if (!result.Success)
                 return NotFound(result.Message);
 
@@ -139,7 +141,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPatch("cancel/{id}")]
-        [Authorize(Roles = "Customer,Operator")]
+        [Authorize(Roles = "Customer,Operator, Admin")]
         public async Task<IActionResult> CancelReservation(Guid id)
         {
             var result = await _reservationService.CancelReservationAsync(id);
@@ -162,7 +164,7 @@ namespace FlightReservation.Controllers
         }
 
 
-        [HttpPost("confirm-after-payment/{id}")]
+        [HttpPatch("confirm-after-payment/{id}")]
         [Authorize(Roles = "Admin,Operator")]
         public async Task<IActionResult> ConfirmReservationAfterPayment(Guid id)
         {

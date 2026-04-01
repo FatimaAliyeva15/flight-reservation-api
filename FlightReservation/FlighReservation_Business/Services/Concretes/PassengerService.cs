@@ -7,6 +7,7 @@ using FlightReservation_Core.Business.Utilities.Results.Concrete;
 using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using FlightReservation_Entities.Concretes;
 using FlightReservation_Entities.DTOs.AirlineDTOs;
+using FlightReservation_Entities.DTOs.NotificationDTOs;
 using FlightReservation_Entities.DTOs.PassengerDTOs;
 using System;
 using System.Collections.Generic;

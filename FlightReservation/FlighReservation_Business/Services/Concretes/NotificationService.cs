@@ -8,6 +8,7 @@ using FlightReservation_Core.Business.Utilities.Results.Concrete;
 using FlightReservation_DataAccess.UnitOfWork.Abstract;
 using FlightReservation_Entities.Concretes;
 using FlightReservation_Entities.DTOs.NotificationDTOs;
+using FlightReservation_Entities.DTOs.ReservationDTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -25,13 +26,23 @@ namespace FlighReservation_Business.Services.Concretes
             _mapper = mapper;
         }
 
-        public async Task<IResult> AddNotificationAsync(NotificationCreateDto createDTO)
+        public async Task<IResult> AddNotificationAsync(NotificationCreateDto createDTO, string userId)
         {
-            var notification = _mapper.Map<Notification>(createDTO);
+            //var notification = _mapper.Map<Notification>(createDTO);
 
-            notification.CreatedAt = DateTime.UtcNow;
-            notification.SentAt = DateTime.UtcNow;
-            notification.IsRead = false;
+            var notification = new Notification
+            {
+                Title = createDTO.Title,
+                Message = createDTO.Message,
+                AppUserId = userId,
+                CreatedAt = DateTime.UtcNow,
+                SentAt = DateTime.UtcNow,
+                IsRead = false
+            };
+
+            //notification.CreatedAt = DateTime.UtcNow;
+            //notification.SentAt = DateTime.UtcNow;
+            //notification.IsRead = false;
 
             await _unitOfWork.NotificationRepository.AddAsync(notification);
 
@@ -71,13 +82,10 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<NotificationGetAllDto>>> GetAllNotificationsPaginatedAsync(int page, int size)
         {
-            var notifications = await _unitOfWork.NotificationRepository
-            .GetAllPaginatedAsync(page, size, null, "AppUser");
+            var notifications = await _unitOfWork.NotificationRepository.GetAllPaginatedAsync(page, size, null, "AppUser");
 
             if (notifications.Count == 0)
-                return new ErrorDataResult<List<NotificationGetAllDto>>(
-                    new List<NotificationGetAllDto>(),
-                    "Notifications not found");
+                return new ErrorDataResult<List<NotificationGetAllDto>>(new List<NotificationGetAllDto>(),"Notifications not found");
 
             var dtos = _mapper.Map<List<NotificationGetAllDto>>(notifications);
 
@@ -96,6 +104,28 @@ namespace FlighReservation_Business.Services.Concretes
             dto.UserName = notification.AppUser?.UserName;
 
             return new SuccessDataResult<NotificationGetDto>(dto, "Notification found");
+        }
+
+        public async Task<IDataResult<List<NotificationGetAllDto>>> GetNotificationsByPassengerAsync(string userId)
+        {
+            var notifications = await _unitOfWork.NotificationRepository.GetAllAsync(n => n.AppUserId == userId, "AppUser");
+
+            if (notifications.Count == 0)
+                return new ErrorDataResult<List<NotificationGetAllDto>>(new List<NotificationGetAllDto>(), "Notifications not found");
+
+            //var reservations = await _unitOfWork.ReservationRepository.GetAllAsync(r => r.AppUserId == userId, "Flight", "Tickets", "AppUser");
+
+            var dtos = notifications.Select(r => new NotificationGetAllDto
+            {
+                Id = r.Id,
+                Title = r.Title,
+                Message = r.Message,
+                IsRead = r.IsRead,
+                SentAt = r.SentAt,
+                UserName = r.AppUser?.FullName
+            }).ToList();
+
+            return new SuccessDataResult<List<NotificationGetAllDto>>(dtos, "Notifications listed");
         }
 
         public async Task<IResult> HardDeleteNotificationAsync(Guid id)

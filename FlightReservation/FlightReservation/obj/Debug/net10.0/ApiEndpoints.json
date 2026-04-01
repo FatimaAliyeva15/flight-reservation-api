@@ -780,6 +780,16 @@
   },
   {
     "ContainingType": "FlightReservation.Controllers.NotificationsController",
+    "Method": "GetMyNotifications",
+    "RelativePath": "api/Notifications/GetMyNotifications/my-notifications",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.NotificationsController",
     "Method": "GetNotificationById",
     "RelativePath": "api/Notifications/GetNotificationById/{id}",
     "HttpMethod": "GET",
@@ -1241,7 +1251,7 @@
     "ContainingType": "FlightReservation.Controllers.ReservationsController",
     "Method": "ConfirmReservationAfterPayment",
     "RelativePath": "api/Reservations/ConfirmReservationAfterPayment/confirm-after-payment/{id}",
-    "HttpMethod": "POST",
+    "HttpMethod": "PATCH",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -1570,27 +1580,6 @@
   },
   {
     "ContainingType": "FlightReservation.Controllers.SeatsController",
-    "Method": "ReserveSeat",
-    "RelativePath": "api/Seats/ReserveSeat/reserve",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "seatId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "reservationId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FlightReservation.Controllers.SeatsController",
     "Method": "SoftDeleteSeat",
     "RelativePath": "api/Seats/SoftDeleteSeat/soft/{id}",
     "HttpMethod": "DELETE",
@@ -1638,27 +1627,6 @@
         "Name": "dto",
         "Type": "FlightReservation_Entities.DTOs.TicketDTOs.TicketCreateDto",
         "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FlightReservation.Controllers.TicketsController",
-    "Method": "AssignSeatToTicket",
-    "RelativePath": "api/Tickets/AssignSeatToTicket/assign-seat",
-    "HttpMethod": "PATCH",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "ticketId",
-        "Type": "System.Guid",
-        "IsRequired": false
-      },
-      {
-        "Name": "seatId",
-        "Type": "System.Guid",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": []
@@ -1766,6 +1734,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FlightReservation.Controllers.TicketsController",
+    "Method": "GetTicketsByCurrentUser",
+    "RelativePath": "api/Tickets/GetTicketsByCurrentUser/by-passenger",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {

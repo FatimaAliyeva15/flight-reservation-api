@@ -9,7 +9,7 @@ namespace FlightReservation_Entities.DTOs.ReservationDTOs
     public class ReservationWithTicketsDto: IDto
     {
         public ReservationCreateDto Reservation { get; set; }
-        public List<TicketCreateDto> Tickets { get; set; }
+        public List<ReservationCreateWithTicketDto> Tickets { get; set; }
 
     }
 }

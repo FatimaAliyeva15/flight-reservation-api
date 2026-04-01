@@ -18,7 +18,7 @@ namespace FlighReservation_Business.Services.Abstracts
         Task<IResult> SoftDeleteReservationAsync(Guid id);
         Task<IResult> HardDeleteReservationAsync(Guid id);
         Task<IResult> RecoverReservationAsync(Guid id);
-        Task<IResult> CreateReservationWithTicketsAsync(ReservationCreateDto createDto, List<TicketCreateDto> ticketsDto);
+        Task<IResult> CreateReservationWithTicketsAsync(ReservationCreateDto createDto, List<ReservationCreateWithTicketDto> ticketsDto, string userId);
         Task<IDataResult<List<ReservationGetAllDto>>> GetReservationsByPassengerAsync(string userId);
         Task<IResult> CancelReservationAsync(Guid reservationId);
         Task<IResult> ConfirmReservationAfterPaymentAsync(Guid reservationId);

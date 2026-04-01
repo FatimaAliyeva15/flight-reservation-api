@@ -1,5 +1,6 @@
 ﻿using FlighReservation_Business.Services.Abstracts;
 using FlightReservation_Entities.DTOs.AirportDTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,7 @@ namespace FlightReservation.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    [Authorize]
     public class AirportsController : ControllerBase
     {
         private readonly IAirportService _airportService;
@@ -18,6 +20,7 @@ namespace FlightReservation.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddAirport([FromBody] AirportCreateDto createDto)
         {
             var result = await _airportService.AddAirportAsync(createDto);
@@ -27,6 +30,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> UpdateAirport(Guid id, [FromBody] AirportUpdateDto updateDto)
         {
             var result = await _airportService.UpdateAirportAsync(id, updateDto);
@@ -36,6 +40,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpDelete("soft/{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SoftDeleteAirport(Guid id)
         {
             var result = await _airportService.SoftDeleteAirportAsync(id);
@@ -45,6 +50,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpDelete("hard/{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> HardDeleteAirport(Guid id)
         {
             var result = await _airportService.HardDeleteAirportAsync(id);
@@ -54,6 +60,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpPatch("recover/{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> RecoverAirport(Guid id)
         {
             var result = await _airportService.RecoverAirportAsync(id);
@@ -63,6 +70,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> GetAirportById(Guid id)
         {
             var result = await _airportService.GetAirportByIdAsync(id);
@@ -72,6 +80,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin, Operator, Customer")]
         public async Task<IActionResult> GetAllAirports()
         {
             var result = await _airportService.GetAllAirportsAsync();
@@ -81,6 +90,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("paginated")]
+        [Authorize(Roles = "Admin, Operator")]
         public async Task<IActionResult> GetAllAirportsPaginated([FromQuery] int page = 1, [FromQuery] int size = 10)
         {
             var result = await _airportService.GetAllAirportsPaginatedAsync(page, size);
@@ -90,6 +100,7 @@ namespace FlightReservation.Controllers
         }
 
         [HttpGet("deleted")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllDeletedAirports()
         {
             var result = await _airportService.GetAllDeletedAirportsAsync();

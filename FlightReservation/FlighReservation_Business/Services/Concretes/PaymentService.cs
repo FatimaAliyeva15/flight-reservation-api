@@ -28,9 +28,26 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IResult> AddPaymentAsync(PaymentCreateDto createDto)
         {
-            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == createDto.ReservationId);
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == createDto.ReservationId, includeDeleted: false, "Tickets");
             if (reservation == null)
                 throw new NotFoundException(ExceptionMessage.ReservationNotFound);
+
+            if(reservation.Tickets == null || reservation.Tickets.Count == 0)
+                return new ErrorResult("Cannot make payment: Reservation has no tickets.");
+
+            if (reservation.IsPaid)
+                return new ErrorResult("Reservation already paid.");
+
+            if (reservation.Status != ReservationStatus.PendingPayment)
+                return new ErrorResult($"Payment cannot be made when reservation status is {reservation.Status}");
+
+            if (createDto.Amount != reservation.TotalPrice)
+                return new ErrorResult($"Payment amount must be exactly {reservation.TotalPrice}");
+
+            bool paymentSuccess = true;
+            if (!paymentSuccess)
+                return new ErrorResult("Payment failed.");
+
 
             var payment = new Payment
             {
@@ -38,10 +55,12 @@ namespace FlighReservation_Business.Services.Concretes
                 AppUserId = reservation.AppUserId,
                 Amount = createDto.Amount,
                 Status = PaymentStatus.Pending,
+                PaidAt = DateTime.UtcNow,
                 CreatedAt = DateTime.UtcNow
             };
 
             await _unitOfWork.PaymentRepository.AddAsync(payment);
+
             var result = await _unitOfWork.SaveAsync();
 
             return result > 0 ? new SuccessResult("Payment created") : new ErrorResult("Payment creation failed");
@@ -51,28 +70,39 @@ namespace FlighReservation_Business.Services.Concretes
         public async Task<IResult> ConfirmPaymentAsync(Guid paymentId)
         {
             var payment = await _unitOfWork.PaymentRepository.GetAsync(p => p.Id == paymentId);
+
             if (payment == null)
                 throw new NotFoundException(ExceptionMessage.PaymentNotFound);
 
             if (payment.Status == PaymentStatus.Completed)
                 return new ErrorResult("Payment already completed");
 
+            
+            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == payment.ReservationId, false, "Tickets");
+
+            if (reservation == null)
+                throw new NotFoundException(ExceptionMessage.ReservationNotFound);
+
+            
+            if (reservation.Tickets == null || reservation.Tickets.Count == 0)
+                return new ErrorResult("Reservation has no tickets");
+
             payment.Status = PaymentStatus.Completed;
             payment.PaidAt = DateTime.UtcNow;
 
-
-            var reservation = await _unitOfWork.ReservationRepository.GetAsync(r => r.Id == payment.ReservationId);
-            if (reservation != null)
-            {
-                reservation.Status = ReservationStatus.Confirmed;
-                reservation.IsPaid = true;
-                reservation.PaidAt = DateTime.UtcNow;
-            }
+            
+            reservation.Status = ReservationStatus.Confirmed;
+            reservation.IsPaid = true;
+            reservation.PaidAt = DateTime.UtcNow;
 
             await _unitOfWork.PaymentRepository.Update(payment);
+            await _unitOfWork.ReservationRepository.Update(reservation);
+
             var result = await _unitOfWork.SaveAsync();
 
-            return result > 0 ? new SuccessResult("Payment confirmed") : new ErrorResult("Payment confirmation failed");
+            return result > 0
+                ? new SuccessResult("Payment confirmed and reservation completed")
+                : new ErrorResult("Payment confirmation failed");
         }
 
         public async Task<IDataResult<List<PaymentGetAllDto>>> GetAllDeletedPaymentsAsync()
@@ -88,7 +118,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<PaymentGetAllDto>>> GetAllPaymentsAsync()
         {
-            var payments = await _unitOfWork.PaymentRepository.GetAllAsync(p => !p.IsDeleted, null, "Reservation", "Reservation.AppUser");
+            var payments = await _unitOfWork.PaymentRepository.GetAllAsync(p => !p.IsDeleted, "Reservation", "AppUser");
             if (payments.Count == 0)
                 return new ErrorDataResult<List<PaymentGetAllDto>>(new List<PaymentGetAllDto>(), "Payment not founded");
 
@@ -130,7 +160,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<PaymentGetAllDto>>> GetPaymentsByPassengerAsync(string appUserId)
         {
-            var payments = await _unitOfWork.PaymentRepository.GetAllAsync(p => p.Reservation.AppUserId == appUserId && !p.IsDeleted, null,  "Reservation","Reservation.AppUser");
+            var payments = await _unitOfWork.PaymentRepository.GetAllAsync(p => p.Reservation.AppUserId == appUserId && !p.IsDeleted, "Reservation","AppUser");
             var dtos = _mapper.Map<List<PaymentGetAllDto>>(payments);
 
             return new SuccessDataResult<List<PaymentGetAllDto>>(dtos);
@@ -139,7 +169,7 @@ namespace FlighReservation_Business.Services.Concretes
 
         public async Task<IDataResult<List<PaymentGetAllDto>>> GetPaymentsByReservationAsync(Guid reservationId)
         {
-            var payments = await _unitOfWork.PaymentRepository.GetAllAsync(p => p.ReservationId == reservationId && !p.IsDeleted, null, "Reservation", "Reservation.AppUser");
+            var payments = await _unitOfWork.PaymentRepository.GetAllAsync(p => p.ReservationId == reservationId && !p.IsDeleted,  "Reservation", "AppUser");
 
             if (payments.Count == 0)
                 return new ErrorDataResult<List<PaymentGetAllDto>>(new List<PaymentGetAllDto>(),"No payment found");

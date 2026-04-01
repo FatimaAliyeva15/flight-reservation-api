@@ -12,10 +12,13 @@ namespace FlighReservation_Business.Services.Abstracts
         Task<IDataResult<NotificationGetDto>> GetNotificationByIdAsync(Guid id);
         Task<IDataResult<List<NotificationGetAllDto>>> GetAllNotificationsPaginatedAsync(int page, int size);
         Task<IDataResult<List<NotificationGetAllDto>>> GetAllDeletedNotificationsAsync();
-        Task<IResult> AddNotificationAsync(NotificationCreateDto createDTO);
+        Task<IResult> AddNotificationAsync(NotificationCreateDto createDTO, string userId);
         Task<IResult> UpdateNotificationAsync(Guid id, NotificationUpdateDto updateDTO);
         Task<IResult> HardDeleteNotificationAsync(Guid id);
         Task<IResult> SoftDeleteNotificationAsync(Guid id);
         Task<IResult> RecoverNotificationAsync(Guid id);
+        Task<IDataResult<List<NotificationGetAllDto>>> GetNotificationsByPassengerAsync(string userId);
+
+
     }
 }
